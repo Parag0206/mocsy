@@ -46,8 +46,8 @@ PROGRAM test_mocsy
 
    call vars(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p, tempis,         &  ! OUTPUT
              temp, sal, alk, dic, sil, phos, Patm, depth, lat, N,                             &  ! INPUT
-             optCON='mol/kg', optT='Tinsitu', optP='db', optB='l10', optK1K2=optK1K2, optKf='dg',&
-             ph_deriv=ph_deriv, pco2_deriv=pco2_deriv, OmegaA_deriv=OmegaA_deriv)     ! INPUT OPTIONS
+             optCON='mol/kg', optT='Tinsitu', optP='db', optB='l10', optK1K2=optK1K2, optKf='dg')
+             !ph_deriv=ph_deriv, pco2_deriv=pco2_deriv, OmegaA_deriv=OmegaA_deriv)     ! INPUT OPTIONS
 !  Print out results (typical for data: concentration units differ)
    write(*,50)
    write(*,200)
