@@ -11,6 +11,6 @@ MODULE msingledouble
 
   INTEGER, PARAMETER :: r8 = KIND(ifelse(USE_PRECISION,2,1.0d0,1.0e0))
 
-  INTEGER, PARAMETER :: r8 = KIND(1.0d0)
+  INTEGER, PARAMETER :: rx = KIND(1.0d0)
   INTEGER, PARAMETER :: wp = KIND(1.0d0)
 END MODULE msingledouble
