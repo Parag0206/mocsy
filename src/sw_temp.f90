@@ -47,18 +47,18 @@ FUNCTION sw_temp( s, t, p, pr )
   !     pr = reference pressure    [db]
 
   !> salinity [psu (PSS-78)]
-  REAL(kind=rx) ::   s
+  REAL(kind=r8) ::   s
   !> potential temperature [degree C (IPTS-68)]
-  REAL(kind=rx) ::   t
+  REAL(kind=r8) ::   t
   !> pressure [db]
-  REAL(kind=rx) ::   p
+  REAL(kind=r8) ::   p
   !> reference pressure [db]
-  REAL(kind=rx) ::   pr
+  REAL(kind=r8) ::   pr
 
   REAL(kind=r8) ::  ds, dt, dp, dpr
   REAL(kind=r8) :: dsw_temp
 
-  REAL(kind=rx) ::   sw_temp
+  REAL(kind=r8) ::   sw_temp
 ! EXTERNAL sw_ptmp
 ! REAL(kind=r8) ::   sw_ptmp
 

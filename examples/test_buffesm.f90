@@ -10,12 +10,12 @@ PROGRAM test_buffesm
 
 !  For vars routine (called below)
 !  "vars" Output variables:g
-   REAL(kind=rx), DIMENSION(100) :: ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p, tempis
+   REAL(kind=r8), DIMENSION(100) :: ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p, tempis
 !  "vars" Input variables
    INTEGER :: N
 
-   REAL(kind=rx), DIMENSION(100) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat
-   REAL(kind=rx), DIMENSION(100)::  gammaDIC, gammaAlk, betaDIC, betaAlk, omegaDIC, omegaAlk, Rf
+   REAL(kind=r8), DIMENSION(100) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat
+   REAL(kind=r8), DIMENSION(100)::  gammaDIC, gammaAlk, betaDIC, betaAlk, omegaDIC, omegaAlk, Rf
 
 !  "vars" Input options
    CHARACTER(10) :: optCON, optT, optP, optB, optKf, optK1K2, optGAS

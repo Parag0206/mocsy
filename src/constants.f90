@@ -115,16 +115,16 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   INTEGER, INTENT(in) :: N
   !> in <b>situ temperature</b> (when optT='Tinsitu', typical data) 
   !! OR <b>potential temperature</b> (when optT='Tpot', typical models) [degree C]
-  REAL(kind=rx), INTENT(in),    DIMENSION(N) :: temp
+  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: temp
   !> depth in <b>meters</b> (when optP='m') or <b>decibars</b> (when optP='db')
-  REAL(kind=rx), INTENT(in),    DIMENSION(N) :: depth
+  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: depth
   !> latitude <b>[degrees north]</b>
-  REAL(kind=rx), INTENT(in),    DIMENSION(N) :: lat
+  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: lat
   !> salinity <b>[psu]</b>
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: sal
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sal
 
   !> atmospheric pressure <b>[atm]</b>
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: Patm
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: Patm
 
   !> for temp input, choose \b 'Tinsitu' for in situ Temp or 
   !! \b 'Tpot' for potential temperature (in situ Temp is computed, needed for models)
@@ -154,7 +154,7 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   CHARACTER(4), OPTIONAL, INTENT(in) :: optS
   !> longitude <b>[degrees east]</b>
 !!!f2py real(8) optional, intent(in), dimension(n) :: lon = -25.
-  REAL(kind=rx), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
+  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
 !f2py optional :: lon = -25.
 
 ! Ouput variables
@@ -194,10 +194,10 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   REAL(kind=r8), INTENT(out), DIMENSION(N) :: Bt
 
 ! Local variables
-  REAL(kind=rx) :: ssal
-  REAL(kind=rx) :: p
-  REAL(kind=rx) :: tempot, tempis68, tempot68
-  REAL(kind=rx) :: tempis
+  REAL(kind=r8) :: ssal
+  REAL(kind=r8) :: p
+  REAL(kind=r8) :: tempot, tempis68, tempot68
+  REAL(kind=r8) :: tempis
   REAL(kind=r8) :: is, invtk, dlogtk, is2, s2, sqrtis
   REAL(kind=r8) :: Ks_0p, Kf_0p
   REAL(kind=r8) :: total2free, free2SWS, total2SWS, SWS2total
@@ -222,8 +222,8 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   REAL(kind=r8) :: Phydro_atm, Patmd, Ptot, Rgas_atm, vbarCO2
 
 ! local 1-long array version of scalar variables
-  REAL(kind=rx), DIMENSION(1) :: lon1, lat1
-  REAL(kind=rx), DIMENSION(1) :: p1, spra1, sabs1
+  REAL(kind=r8), DIMENSION(1) :: lon1, lat1
+  REAL(kind=r8), DIMENSION(1) :: p1, spra1, sabs1
 
 ! Arrays to pass optional arguments into or use defaults (Dickson et al., 2007)
   CHARACTER(3) :: opB
@@ -320,19 +320,19 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
 !       This is the case for most models and some data
 !       a) Convert the pot. temp on today's "ITS 90" scale to older IPTS 68 scale
 !          (see Dickson et al., Best Practices Guide, 2007, Chap. 5, p. 7, including footnote)
-        tempot68 = (tempot - 0.0002_rx) / 0.99975_rx
+        tempot68 = (tempot - 0.0002_r8) / 0.99975_r8
 !       b) Compute "in-situ Temperature" from "Potential Temperature" (both on IPTS 68)
         tempis68 = sw_temp(sal(i), tempot68, p, SGLE(0.0D0) )
 !       c) Convert the in-situ temp on older IPTS 68 scale to modern scale (ITS 90)
-        tempis = 0.99975_rx*tempis68 + 0.0002_rx
+        tempis = 0.99975_r8*tempis68 + 0.0002_r8
 !       Note: parts (a) and (c) above are tiny corrections;
 !             part  (b) is a big correction for deep waters (but zero at surface)
      ELSEIF (trim(optT) == 'Tinsitu' .OR. trim(optT) == 'tinsitu') THEN
 !       When optT = 'Tinsitu', tempis is input & output (no tempot needed)
         tempis    = temp(i)
-        tempis68  = (temp(i) - 0.0002_rx) / 0.99975_rx
+        tempis68  = (temp(i) - 0.0002_r8) / 0.99975_r8
         dtempot68 = sw_ptmp(DBLE(sal(i)), DBLE(tempis68), DBLE(p), 0.0d0)
-        dtempot   = 0.99975_rx*dtempot68 + 0.0002_rx
+        dtempot   = 0.99975_r8*dtempot68 + 0.0002_r8
      ELSEIF (trim(optT) == 'Tcsv' .OR. trim(optT) == 'tcsv') THEN
 !       Convert given conservative temperature to in-situ temperature
         ! First convert salinity to absolute sal., if necessary
@@ -346,7 +346,7 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
         END IF
         ! Then convert temperature
         tempis = SGLE(gsw_t_from_ct (DBLE(sabs1(1)), DBLE(temp(i)), DBLE(p)))
-        tempis68  = (tempis - 0.0002_rx) / 0.99975_rx
+        tempis68  = (tempis - 0.0002_r8) / 0.99975_r8
      ELSE
         PRINT *,"optT must be either 'Tpot, 'Tinsitu' or 'Tcsv'"
         PRINT *,"you specified optT =", trim(optT) 
@@ -354,7 +354,7 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
      ENDIF
 
 !    Compute constants:
-     IF (temp(i) >= -5.0_rx .AND. temp(i) < 1.0e+2_rx) THEN
+     IF (temp(i) >= -5.0_r8 .AND. temp(i) < 1.0e+2_r8) THEN
 !       Test to indicate if any of input variables are unreasonable
         IF (      sal(i) < 0.  .OR.  sal(i) > 1e+3) THEN
            PRINT *, 'i, icount, temp, sal =', i, icount, temp(i), sal(i)
@@ -387,10 +387,10 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
                lon1(1) = lon(i)
                lat1(1) = lat(i)
            ELSE
-               lon1(1) = 1.e20_rx
-               lat1(1) = 1.e20_rx
+               lon1(1) = 1.e20_r8
+               lat1(1) = 1.e20_r8
            ENDIF
-           IF (lon1(1) .NE. 1.e20_rx .AND. lat1(1) .NE. 1.e20_rx) THEN
+           IF (lon1(1) .NE. 1.e20_r8 .AND. lat1(1) .NE. 1.e20_r8) THEN
               ! longitude and latitude are defined
               CALL sa2sp_geo (sabs1, 1, spra1, p1, lon1, lat1)
            ELSE
@@ -466,7 +466,7 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
         ELSEIF (trim(opK1K2) == 'm10') THEN
 !         Millero (2010, Mar. Fresh Wat. Res.) (seawater scale)
           pK1o = 6320.813d0*invtk + 19.568224d0*dlogtk -126.34048d0
-          ma1 = 13.4038d0*sqrts + 0.03206d0*s - (5.242e-5_rx)*s2
+          ma1 = 13.4038d0*sqrts + 0.03206d0*s - (5.242e-5_r8)*s2
           mb1 = -530.659d0*sqrts - 5.8210d0*s
           mc1 = -2.0664d0*sqrts
           pK1 = pK1o + ma1 + mb1*invtk + mc1*dlogtk
@@ -819,9 +819,9 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   !! OR <b>potential temperature</b> (when optT='Tpot', typical models) [degree C]
   TYPE(DUAL_NUM), INTENT(in),    DIMENSION(N) :: temp
   !> depth in <b>meters</b> (when optP='m') or <b>decibars</b> (when optP='db')
-  REAL(kind=rx), INTENT(in),    DIMENSION(N) :: depth
+  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: depth
   !> latitude <b>[degrees north]</b>
-  REAL(kind=rx), INTENT(in),    DIMENSION(N) :: lat
+  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: lat
   !> salinity <b>[psu]</b>
   TYPE(DUAL_NUM), INTENT(in), DIMENSION(N) :: sal
 !f2py integer intent(hide), depend(sal) :: n=len(sal)
@@ -857,7 +857,7 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   CHARACTER(4), OPTIONAL, INTENT(in) :: optS
   !> longitude <b>[degrees east]</b>
 !!!f2py real(8) optional, intent(in), dimension(n) :: lon = -25.
-  REAL(kind=rx), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
+  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
 !f2py optional :: lon = -25.
 
 ! Ouput variables
@@ -927,8 +927,8 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   TYPE (DUAL_NUM),PARAMETER:: zero=DUAL_NUM(0d0,0.D0), ten=DUAL_NUM(10d0,0.D0)
 
 ! local 1-long array version of scalar variables
-  REAL(kind=rx), DIMENSION(1) :: lon1, lat1
-  REAL(kind=rx), DIMENSION(1) :: p1, spra1, sabs1
+  REAL(kind=r8), DIMENSION(1) :: lon1, lat1
+  REAL(kind=r8), DIMENSION(1) :: p1, spra1, sabs1
 
 ! Arrays to pass optional arguments into or use defaults (Dickson et al., 2007)
   CHARACTER(3) :: opB
@@ -1095,10 +1095,10 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
                lon1(1) = lon(i)
                lat1(1) = lat(i)
            ELSE
-               lon1(1) = 1.e20_rx
-               lat1(1) = 1.e20_rx
+               lon1(1) = 1.e20_r8
+               lat1(1) = 1.e20_r8
            ENDIF
-           IF (lon1(1) .NE. 1.e20_rx .AND. lat1(1) .NE. 1.e20_rx) THEN
+           IF (lon1(1) .NE. 1.e20_r8 .AND. lat1(1) .NE. 1.e20_r8) THEN
               ! longitude and latitude are defined
               CALL sa2sp_geo (sabs1, 1, spra1, p1, lon1, lat1)
            ELSE

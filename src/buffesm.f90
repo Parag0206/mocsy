@@ -142,23 +142,23 @@ SUBROUTINE buffesm(gammaDIC, betaDIC, omegaDIC, gammaALK, betaALK, omegaALK, Rf,
   INTEGER, INTENT(in) :: N
   !> either <b>in situ temperature</b> (when optT='Tinsitu', typical data) 
   !! OR <b>potential temperature</b> (when optT='Tpot', typical models) <b>[degree C]</b>
-  REAL(kind=rx), INTENT(in),    DIMENSION(N) :: temp
+  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: temp
   !> salinity <b>[psu]</b>
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: sal
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sal
   !> total alkalinity in <b>[eq/m^3]</b> (when optCON = 'mol/m3') OR in <b>[eq/kg]</b>  (when optCON = 'mol/kg')
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: alk
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: alk
   !> dissolved inorganic carbon in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: dic
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: dic
   !> SiO2 concentration in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: sil
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sil
   !> phosphate concentration in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: phos
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: phos
   !> atmospheric pressure <b>[atm]</b>
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: Patm
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: Patm
   !> depth in \b meters (when optP='m') or \b decibars (when optP='db')
-  REAL(kind=rx), INTENT(in),    DIMENSION(N) :: depth
+  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: depth
   !> latitude <b>[degrees north]</b>
-  REAL(kind=rx), INTENT(in),    DIMENSION(N) :: lat
+  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: lat
 
   !> choose either \b 'mol/kg' (std DATA units) or \b 'mol/m3' (std MODEL units) to select 
   !! concentration units for input (for alk, dic, sil, phos) & output (co2, hco3, co3)
@@ -191,26 +191,26 @@ SUBROUTINE buffesm(gammaDIC, betaDIC, omegaDIC, gammaALK, betaALK, omegaALK, Rf,
   CHARACTER(4), OPTIONAL, INTENT(in) :: optS
   !> longitude <b>[degrees east]</b>
 !!!f2py real(8) optional, intent(in), dimension(n) :: lon = -25.
-  REAL(kind=rx), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
+  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
 !f2py optional :: lon = -25.
 
 ! Output variables:
 ! -----------------
   !> (d ln CO2 / dDIC)^-1
-  REAL(kind=rx), INTENT(out), DIMENSION(N) :: gammaDIC
+  REAL(kind=r8), INTENT(out), DIMENSION(N) :: gammaDIC
   !> (d ln H+ / dDIC)^-1
-  REAL(kind=rx), INTENT(out), DIMENSION(N) :: betaDIC
+  REAL(kind=r8), INTENT(out), DIMENSION(N) :: betaDIC
   !> (d ln Omega / dDIC)^-1
-  REAL(kind=rx), INTENT(out), DIMENSION(N) :: omegaDIC
+  REAL(kind=r8), INTENT(out), DIMENSION(N) :: omegaDIC
   !> aqueous CO2* concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg</b>] depending on choice for optCON
   !> (d ln CO2 / dAlk)^-1
-  REAL(kind=rx), INTENT(out), DIMENSION(N) :: gammaALK
+  REAL(kind=r8), INTENT(out), DIMENSION(N) :: gammaALK
   !> (d ln H+ / dAlk)^-1
-  REAL(kind=rx), INTENT(out), DIMENSION(N) :: betaALK
+  REAL(kind=r8), INTENT(out), DIMENSION(N) :: betaALK
   !> (d ln Omega / dAlk)^-1
-  REAL(kind=rx), INTENT(out), DIMENSION(N) :: omegaALK
+  REAL(kind=r8), INTENT(out), DIMENSION(N) :: omegaALK
   !> Revelle factor, i.e., dpCO2/pCO2 / dDIC/DIC
-  REAL(kind=rx), INTENT(out), DIMENSION(N) :: Rf
+  REAL(kind=r8), INTENT(out), DIMENSION(N) :: Rf
 
 ! Local variables
 ! -----------------
@@ -233,20 +233,20 @@ SUBROUTINE buffesm(gammaDIC, betaDIC, omegaDIC, gammaALK, betaALK, omegaALK, Rf,
   REAL(kind=r8), DIMENSION(N) :: Bt
 
   ! 2) Output from vars.f90:
-  REAL(kind=rx), DIMENSION(N) :: ph
-  REAL(kind=rx), DIMENSION(N) :: pco2
-  REAL(kind=rx), DIMENSION(N) :: fco2
-  REAL(kind=rx), DIMENSION(N) :: co2
-  REAL(kind=rx), DIMENSION(N) :: hco3
-  REAL(kind=rx), DIMENSION(N) :: co3
-  REAL(kind=rx), DIMENSION(N) :: OmegaA
-  REAL(kind=rx), DIMENSION(N) :: OmegaC
-  REAL(kind=rx), DIMENSION(N) :: BetaD
-  REAL(kind=rx), DIMENSION(N) :: rhoSW
-  REAL(kind=rx), DIMENSION(N) :: p
-  REAL(kind=rx), DIMENSION(N) :: tempis
+  REAL(kind=r8), DIMENSION(N) :: ph
+  REAL(kind=r8), DIMENSION(N) :: pco2
+  REAL(kind=r8), DIMENSION(N) :: fco2
+  REAL(kind=r8), DIMENSION(N) :: co2
+  REAL(kind=r8), DIMENSION(N) :: hco3
+  REAL(kind=r8), DIMENSION(N) :: co3
+  REAL(kind=r8), DIMENSION(N) :: OmegaA
+  REAL(kind=r8), DIMENSION(N) :: OmegaC
+  REAL(kind=r8), DIMENSION(N) :: BetaD
+  REAL(kind=r8), DIMENSION(N) :: rhoSW
+  REAL(kind=r8), DIMENSION(N) :: p
+  REAL(kind=r8), DIMENSION(N) :: tempis
   ! practical salinity [psu] computed when absolute saliniry is given 
-  REAL(kind=rx), DIMENSION(N) :: salprac
+  REAL(kind=r8), DIMENSION(N) :: salprac
 
   ! 3) Other Local variables (needed to compute buffer factors)
   REAL(kind=r8) :: Alkc, Borate, h, oh
@@ -320,15 +320,15 @@ SUBROUTINE buffesm(gammaDIC, betaDIC, omegaDIC, gammaALK, betaALK, omegaALK, Rf,
 !  Compute buffer factors
 !  ----------------------
    DO i=1,N
-      IF (ph(i) .EQ. 1.e20_rx) THEN
+      IF (ph(i) .EQ. 1.e20_r8) THEN
          ! Missing input data, thus mask values
-         gammaDIC(i)   = 1.e20_rx
-         betaDIC(i)    = 1.e20_rx
-         omegaDIC(i)   = 1.e20_rx
-         gammaALK(i)   = 1.e20_rx
-         betaALK(i)    = 1.e20_rx
-         omegaALK(i)   = 1.e20_rx
-         Rf(i)         = 1.e20_rx
+         gammaDIC(i)   = 1.e20_r8
+         betaDIC(i)    = 1.e20_r8
+         omegaDIC(i)   = 1.e20_r8
+         gammaALK(i)   = 1.e20_r8
+         betaALK(i)    = 1.e20_r8
+         omegaALK(i)   = 1.e20_r8
+         Rf(i)         = 1.e20_r8
       ELSE
          ! Compute buffer factors
 

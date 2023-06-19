@@ -9,12 +9,12 @@ PROGRAM test_errors
 
 
 !  Output variables:
-   REAL(kind=rx), DIMENSION(6) :: eh, epco2, efco2, eco2, ehco3, eco3, eOmegaA, eOmegaC
+   REAL(kind=r8), DIMENSION(6) :: eh, epco2, efco2, eco2, ehco3, eco3, eOmegaA, eOmegaC
 !  Input variables
-   REAL(kind=rx), DIMENSION(6) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat
-   REAL(kind=rx), DIMENSION(6) :: temp_e, sal_e, ALK_e, DIC_e, sil_e, phos_e
-   REAL(kind=rx), DIMENSION(7) :: epK, epKstd, epK0
-   REAL(kind=rx)               :: ebt
+   REAL(kind=r8), DIMENSION(6) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat
+   REAL(kind=r8), DIMENSION(6) :: temp_e, sal_e, ALK_e, DIC_e, sil_e, phos_e
+   REAL(kind=r8), DIMENSION(7) :: epK, epKstd, epK0
+   REAL(kind=r8)               :: ebt
    
 !  Input options
    CHARACTER(10) :: optCON, optT, optP, optB, optKf, optK1K2
@@ -41,7 +41,7 @@ PROGRAM test_errors
  !  epK = (/0.002_r8, 0.0075_r8, 0.015_r8, 0.01_r8, 0.01_r8, 0.02_r8, 0.02_r8/)
     epKstd = (/0.002_r8, 0.0075_r8, 0.015_r8, 0.01_r8, 0.01_r8, 0.02_r8, 0.02_r8/)
     epK0 = epKstd * 0.0d0
-    ebt = 0.02_rx
+    ebt = 0.02_r8
 
    ! ------------------
    ! 1s test : 1 record 
@@ -70,7 +70,7 @@ PROGRAM test_errors
    call errors(eh, epco2, efco2, eco2, ehco3, eco3, eOmegaA, eOmegaC,            &  ! OUTPUT
              temp, sal, alk, dic, sil, phos, Patm, depth, lat, 1,                &  ! INPUT
              temp_e, sal_e, ALK_e, DIC_e, sil_e, phos_e,                         &
-             optCON, optT, optP, optB=optB, optK1K2=optK1K2, optKf=optKf, epK=epK0, ebt=0.0_rx )
+             optCON, optT, optP, optB=optB, optK1K2=optK1K2, optKf=optKf, epK=epK0, ebt=0.0_r8 )
    write (*,*) "              eh          epco2          efco2          eco2           ehco3          eco3   ", &
         "      eOmegaA        eOmegaC   "
    DO i = 1,1
@@ -84,7 +84,7 @@ PROGRAM test_errors
    call errors(eh, epco2, efco2, eco2, ehco3, eco3, eOmegaA, eOmegaC,          &  ! OUTPUT
              temp, sal, alk, dic, sil, phos, Patm, depth, lat, 1,              &  ! INPUT
              temp_e, sal_e, ALK_e, DIC_e, sil_e, phos_e,                       &
-             optCON, optT, optP, optB=optB, optK1K2=optK1K2, optKf=optKf, epK=epKstd, ebt=0.0_rx )
+             optCON, optT, optP, optB=optB, optK1K2=optK1K2, optKf=optKf, epK=epKstd, ebt=0.0_r8 )
    write (*,*) "              eh          epco2          efco2          eco2           ehco3          eco3   ", &
         "      eOmegaA        eOmegaC   "
    DO i = 1,1
@@ -112,7 +112,7 @@ PROGRAM test_errors
    call errors(eh, epco2, efco2, eco2, ehco3, eco3, eOmegaA, eOmegaC,          &  ! OUTPUT
              temp, sal, alk, dic, sil, phos, Patm, depth, lat, 1,              &  ! INPUT
              temp_e, sal_e, ALK_e, DIC_e, sil_e, phos_e,                       &
-             optCON, optT, optP, optB=optB, optK1K2=optK1K2, optKf=optKf, epK=epKstd, ebt=0.04_rx )
+             optCON, optT, optP, optB=optB, optK1K2=optK1K2, optKf=optKf, epK=epKstd, ebt=0.04_r8 )
    write (*,*) "              eh          epco2          efco2          eco2           ehco3          eco3   ", &
         "      eOmegaA        eOmegaC   "
    DO i = 1,1

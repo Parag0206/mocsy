@@ -13,7 +13,7 @@ PROGRAM test_kzero
    REAL(kind=r8), DIMENSION(1) :: k0_co2, k0_n2o
    
 !  Input variables
-   REAL(kind=rx), DIMENSION(1) :: temp, sal
+   REAL(kind=r8), DIMENSION(1) :: temp, sal
    
 !  Input at standard T and S
 !  temp(1)   = 25.0    

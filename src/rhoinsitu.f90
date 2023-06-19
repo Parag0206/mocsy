@@ -23,11 +23,11 @@ SUBROUTINE rhoinsitu(salt, tempis, pdbar, N, rhois)
   ! pdbar  = pressure [db]
 
   !> salinity [psu]
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: salt
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: salt
   !> in situ temperature [C]
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: tempis
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: tempis
   !> pressure [db]
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: pdbar
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: pdbar
 !!!f2py optional , depend(salt) :: n=len(salt)
 !f2py depend(salt) :: n=len(salt)
 
@@ -35,12 +35,12 @@ SUBROUTINE rhoinsitu(salt, tempis, pdbar, N, rhois)
   ! rhois  = in situ density
 
   !> in situ density [kg/m3]
-  REAL(kind=rx), INTENT(out), DIMENSION(N) :: rhois
+  REAL(kind=r8), INTENT(out), DIMENSION(N) :: rhois
 
 ! Local variables
   INTEGER :: i
 
-! REAL(kind=rx) ::  rho
+! REAL(kind=r8) ::  rho
 ! EXTERNAL rho
 
   DO i = 1,N

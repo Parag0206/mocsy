@@ -11,11 +11,11 @@ PROGRAM test_derivauto
 
 !  For vars routine (called below)
 !  "vars" Output variables:
-   REAL(kind=rx), DIMENSION(1) :: ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p, tempis
+   REAL(kind=r8), DIMENSION(1) :: ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p, tempis
 !  "vars" Input variables
    INTEGER :: N
-   REAL(kind=rx), DIMENSION(1) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat
-   REAL(kind=rx), DIMENSION(6,1) :: ph_deriv, pco2_deriv, fco2_deriv, co2_deriv, &
+   REAL(kind=r8), DIMENSION(1) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat
+   REAL(kind=r8), DIMENSION(6,1) :: ph_deriv, pco2_deriv, fco2_deriv, co2_deriv, &
                      hco3_deriv, co3_deriv, omegaa_deriv, omegac_deriv
 !  "vars" Input options
    CHARACTER(10) :: optCON, optT, optP, optB, optKf, optK1K2

@@ -24,7 +24,7 @@ version 2.3.7, 2017-12-08
 
 version 2.3.6, 2017-10-21
 -----------------------------------
-	- postpended precision indicator "_rx" to input data in test_mocsy.f90
+	- postpended precision indicator "_r8" to input data in test_mocsy.f90
 	- added 'verbose' option to vars.f90, following code from J. Kasting
 
 version 2.3.5, 2017-10-20

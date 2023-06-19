@@ -22,18 +22,18 @@ SUBROUTINE depth2press(depth, lat, pdbar, N)
 
 ! INPUT variables
   !> depth [m]
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: depth
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: depth
   !> latitude [degrees]
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: lat
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: lat
 
 ! OUTPUT variables:
   !> pressure [db]
-  REAL(kind=rx), INTENT(out), DIMENSION(N) :: pdbar
+  REAL(kind=r8), INTENT(out), DIMENSION(N) :: pdbar
 
   !     Local variables
   INTEGER :: i
 
-! REAL(kind=rx) ::  p80
+! REAL(kind=r8) ::  p80
 ! EXTERNAL p80
 
   DO i = 1,N

@@ -3,7 +3,7 @@
                 '4' : 'float',
               'isp' : 'float',
                'r4' : 'float',
-               'rx' : 'double',
+               'r8' : 'double',
                 '8' : 'double',
                'r8' : 'double',
                'dp' : 'double',

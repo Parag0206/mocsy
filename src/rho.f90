@@ -18,11 +18,11 @@ FUNCTION rho(salt, temp, pbar)
   IMPLICIT NONE
 
   !> salinity [psu]
-  REAL(kind=rx) :: salt
+  REAL(kind=r8) :: salt
   !> in situ temperature (C)
-  REAL(kind=rx) :: temp
+  REAL(kind=r8) :: temp
   !> pressure (bar) [Note units: this is NOT in decibars]
-  REAL(kind=rx) :: pbar
+  REAL(kind=r8) :: pbar
 
   REAL(kind=r8) :: s, t, p
 ! REAL(kind=r8) :: t68
@@ -32,7 +32,7 @@ FUNCTION rho(salt, temp, pbar)
   REAL(kind=r8) :: Ksbmw, Ksbm0, Ksbm
   REAL(kind=r8) :: drho
 
-  REAL(kind=rx) :: rho
+  REAL(kind=r8) :: rho
 
   !     Input arguments:
   !     -------------------------------------

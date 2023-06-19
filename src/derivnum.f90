@@ -147,23 +147,23 @@ SUBROUTINE derivnum (dh_dx, dpco2_dx, dfco2_dx, dco2_dx, dhco3_dx,              
   INTEGER, INTENT(in) :: N
   !> either <b>in situ temperature</b> (when optT='Tinsitu', typical data) 
   !! OR <b>potential temperature</b> (when optT='Tpot', typical models) <b>[degree C]</b>
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: temp
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: temp
   !> salinity <b>[psu] or [g/kg]</b>
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: sal
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sal
   !> total alkalinity in <b>[eq/m^3]</b> (when optCON = 'mol/m3') OR in <b>[eq/kg]</b>  (when optCON = 'mol/kg')
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: alk
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: alk
   !> dissolved inorganic carbon in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: dic
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: dic
   !> SiO2 concentration in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: sil
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sil
   !> phosphate concentration in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: phos
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: phos
   !> atmospheric pressure <b>[atm]</b>
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: Patm
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: Patm
   !> depth in \b meters (when optP='m') or \b decibars (when optP='db')
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: depth
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: depth
   !> latitude <b>[degrees north]</b>
-  REAL(kind=rx), INTENT(in), DIMENSION(N) :: lat
+  REAL(kind=r8), INTENT(in), DIMENSION(N) :: lat
   ! 3-character identifier of input variable with respect to which derivative is requested
   ! ('alk', 'dic', 'pho', 'sil', 'tem', 'sal'
   CHARACTER(3), INTENT(in) ::  derivar
@@ -197,73 +197,73 @@ SUBROUTINE derivnum (dh_dx, dpco2_dx, dfco2_dx, dco2_dx, dhco3_dx,              
   CHARACTER(4), OPTIONAL, INTENT(in) :: optS
   !> longitude <b>[degrees east]</b>
 !!!f2py real(8) optional, intent(in), dimension(n) :: lon = -25.
-  REAL(kind=rx), OPTIONAL, INTENT(in), DIMENSION(N) :: lon
+  REAL(kind=r8), OPTIONAL, INTENT(in), DIMENSION(N) :: lon
 !f2py optional :: lon = -25.
 
 ! Output variables:
   !> derivative of H on the <b>total scale</b>
-  REAL(kind=rx), INTENT(OUT), DIMENSION(N) :: dh_dx
+  REAL(kind=r8), INTENT(OUT), DIMENSION(N) :: dh_dx
   !> derivative of CO2 partial pressure <b>[uatm]</b>
-  REAL(kind=rx), INTENT(OUT), DIMENSION(N) :: dpco2_dx
+  REAL(kind=r8), INTENT(OUT), DIMENSION(N) :: dpco2_dx
   !> derivative of CO2 fugacity <b>[uatm]</b>
-  REAL(kind=rx), INTENT(OUT), DIMENSION(N) :: dfco2_dx
+  REAL(kind=r8), INTENT(OUT), DIMENSION(N) :: dfco2_dx
   !> derivative of aqueous CO2* concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg</b>] depending on choice for optCON
-  REAL(kind=rx), INTENT(OUT), DIMENSION(N) :: dco2_dx
+  REAL(kind=r8), INTENT(OUT), DIMENSION(N) :: dco2_dx
   !> derivative of (HCO3-) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=rx), INTENT(OUT), DIMENSION(N) :: dhco3_dx
+  REAL(kind=r8), INTENT(OUT), DIMENSION(N) :: dhco3_dx
   !> derivative of (CO3--) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=rx), INTENT(OUT), DIMENSION(N) :: dco3_dx
+  REAL(kind=r8), INTENT(OUT), DIMENSION(N) :: dco3_dx
   !> derivative of Omega for aragonite, i.e., the aragonite saturation state
-  REAL(kind=rx), INTENT(OUT), DIMENSION(N) :: dOmegaA_dx
+  REAL(kind=r8), INTENT(OUT), DIMENSION(N) :: dOmegaA_dx
   !> derivative of Omega for calcite, i.e., the calcite saturation state
-  REAL(kind=rx), INTENT(OUT), DIMENSION(N) :: dOmegaC_dx
+  REAL(kind=r8), INTENT(OUT), DIMENSION(N) :: dOmegaC_dx
 
 ! Local variables
   !> pH on the <b>total scale</b>
-  REAL(kind=rx), DIMENSION(1,2) :: ph
+  REAL(kind=r8), DIMENSION(1,2) :: ph
   !> ion (H+) concentration on the <b>total scale</b>
-  REAL(kind=rx), DIMENSION(1,2) :: h
+  REAL(kind=r8), DIMENSION(1,2) :: h
   !> CO2 partial pressure <b>[uatm]</b>
-  REAL(kind=rx), DIMENSION(1,2) :: pco2
+  REAL(kind=r8), DIMENSION(1,2) :: pco2
   !> CO2 fugacity <b>[uatm]</b>
-  REAL(kind=rx), DIMENSION(1,2) :: fco2
+  REAL(kind=r8), DIMENSION(1,2) :: fco2
   !> aqueous CO2* concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg</b>] depending on choice for optCON
-  REAL(kind=rx), DIMENSION(1,2) :: co2
+  REAL(kind=r8), DIMENSION(1,2) :: co2
   !> bicarbonate ion (HCO3-) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=rx), DIMENSION(1,2) :: hco3
+  REAL(kind=r8), DIMENSION(1,2) :: hco3
   !> carbonate ion (CO3--) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=rx), DIMENSION(1,2) :: co3
+  REAL(kind=r8), DIMENSION(1,2) :: co3
   !> Omega for aragonite, i.e., the aragonite saturation state
-  REAL(kind=rx), DIMENSION(1,2) :: OmegaA
+  REAL(kind=r8), DIMENSION(1,2) :: OmegaA
   !> Omega for calcite, i.e., the calcite saturation state
-  REAL(kind=rx), DIMENSION(1,2) :: OmegaC
+  REAL(kind=r8), DIMENSION(1,2) :: OmegaC
   !> Revelle factor, i.e., dpCO2/pCO2 / dDIC/DIC
-  REAL(kind=rx), DIMENSION(1) :: BetaD
+  REAL(kind=r8), DIMENSION(1) :: BetaD
   !> in-situ density of seawater; rhoSW = f(s, t, p) in <b>[kg/m3]</b>
-  REAL(kind=rx), DIMENSION(1) :: rhoSW
+  REAL(kind=r8), DIMENSION(1) :: rhoSW
   !> pressure <b>[decibars]</b>; p = f(depth, latitude) if computed from depth [m] (when optP='m') OR p = depth [db] (when optP='db')
-  REAL(kind=rx), DIMENSION(1) :: p
+  REAL(kind=r8), DIMENSION(1) :: p
   !> in-situ temperature \b <b>[degrees C]</b>
-  REAL(kind=rx), DIMENSION(1) :: tempis
+  REAL(kind=r8), DIMENSION(1) :: tempis
 
   ! Arrays that are copies of input parameters
-  REAL(kind=rx), DIMENSION(1) :: atemp
-  REAL(kind=rx), DIMENSION(1) :: asal
-  REAL(kind=rx), DIMENSION(1) :: aalk
-  REAL(kind=rx), DIMENSION(1) :: adic
-  REAL(kind=rx), DIMENSION(1) :: asil
-  REAL(kind=rx), DIMENSION(1) :: aphos
-  REAL(kind=rx), DIMENSION(1) :: aPatm
-  REAL(kind=rx), DIMENSION(1) :: adepth
-  REAL(kind=rx), DIMENSION(1) :: alat
+  REAL(kind=r8), DIMENSION(1) :: atemp
+  REAL(kind=r8), DIMENSION(1) :: asal
+  REAL(kind=r8), DIMENSION(1) :: aalk
+  REAL(kind=r8), DIMENSION(1) :: adic
+  REAL(kind=r8), DIMENSION(1) :: asil
+  REAL(kind=r8), DIMENSION(1) :: aphos
+  REAL(kind=r8), DIMENSION(1) :: aPatm
+  REAL(kind=r8), DIMENSION(1) :: adepth
+  REAL(kind=r8), DIMENSION(1) :: alat
  
   ! value of small delta to apply to input variable when computing numerical derivative
   ! it is actually the ratio of delta relative to input variable value
-  REAL(kind=rx) :: rel_delta_x
+  REAL(kind=r8) :: rel_delta_x
   ! Value of input variable with respect to which we derive
-  REAL(kind=rx) :: input_value
-  REAL(kind=rx), DIMENSION(1) :: ainput1, ainput2
-  REAL(kind=rx) :: abs_delta, dX
+  REAL(kind=r8) :: input_value
+  REAL(kind=r8), DIMENSION(1) :: ainput1, ainput2
+  REAL(kind=r8) :: abs_delta, dX
   
 ! Arrays to pass optional arguments into or use defaults (Dickson et al., 2007)
   CHARACTER(3) :: opB
@@ -281,10 +281,10 @@ SUBROUTINE derivnum (dh_dx, dpco2_dx, dfco2_dx, dco2_dx, dhco3_dx,              
   REAL,PARAMETER :: K_values(7) = (/0.034, 1.2e-06, 8.3e-10, 2.1e-09, 6.1e-14, 6.7e-07, 4.3e-07/)
 
 ! Multiplicative conversion factor to convert from umol/kg to optCON units (mol/kg or mol/m3)
-  REAL(kind=rx) :: xfac
+  REAL(kind=r8) :: xfac
   
 ! Reference value (typically global surface means, for calculating consistent absolute derivatives)
-  REAL(kind=rx) :: ref_value
+  REAL(kind=r8) :: ref_value
   
 ! Set defaults for optional arguments (in Fortran 90)
 ! Note:  Optional arguments with f2py (python) are set above with 

@@ -13,7 +13,7 @@ PROGRAM test_kprime
    REAL(kind=r8), DIMENSION(1) :: kp_cfc11, kp_cfc12, kp_sf6
    
 !  Input variables
-   REAL(kind=rx), DIMENSION(1) :: temp, sal
+   REAL(kind=r8), DIMENSION(1) :: temp, sal
    
 !  Input at standard T and S
 !  temp(1)   = 25.0    
