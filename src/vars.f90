@@ -132,11 +132,6 @@ SUBROUTINE vars(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p,
   !     p = pressure [decibars]; p = f(depth, latitude) if computed from depth [m] OR p = depth if [db]
   !     tempis  = in-situ temperature [degrees C]
 
-#if USE_PRECISION == 2
-#   define SGLE(x)    (x)
-#else
-#   define SGLE(x)    REAL(x)
-#endif
   USE msingledouble
   USE mconstants
   USE mp80
@@ -732,11 +727,6 @@ SUBROUTINE vars_pertK(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,       &
   !     =================
   !     same as routine vars() above except :  BetaD, rhoSW, p, tempis
 
-#if USE_PRECISION == 2
-#   define SGLE(x)    (x)
-#else
-#   define SGLE(x)    REAL(x)
-#endif
 
   USE msingledouble
   USE mconstants

@@ -8,11 +8,6 @@ SUBROUTINE p2fCO2(pCO2, temp, Patm, p, N, fCO2)
   !    Purpose:
   !    Compute fCO2 from arrays of pCO2, in situ temp, atm pressure, & hydrostatic pressure
 
-#if USE_PRECISION == 2
-#   define SGLE(x)    (x)
-#else
-#   define SGLE(x)    REAL(x)
-#endif
 
   USE msingledouble
   IMPLICIT NONE

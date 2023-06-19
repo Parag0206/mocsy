@@ -129,11 +129,6 @@ SUBROUTINE flxco2(co2flux, co2ex, dpco2,                                        
   !     p = pressure [decibars]; p = f(depth, latitude) if computed from depth [m] OR p = depth if [db]
   !     tempis  = in-situ temperature [degrees C]
 
-#if USE_PRECISION == 2
-#   define SGLE(x)    (x)
-#else
-#   define SGLE(x)    REAL(x)
-#endif
 
   USE msingledouble
   USE meos
@@ -1028,11 +1023,6 @@ SUBROUTINE o2flux(T, S, kw660, ppo, o2, dz1, N, o2ex)
   !    Modified for OMIP:   James Orr, LSCE/IPSL France, 14 March 2015
   !    **********************************************************************
 
-#if USE_PRECISION == 2
-#   define SGLE(x)    (x)
-#else
-#   define SGLE(x)    REAL(x)
-#endif
 
   USE msingledouble
   IMPLICIT NONE

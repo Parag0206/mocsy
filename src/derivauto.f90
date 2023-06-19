@@ -105,11 +105,6 @@ SUBROUTINE derivauto(ph_deriv, pco2_deriv, fco2_deriv, co2_deriv, hco3_deriv, co
   !     OmegaC_deriv = derivatives of Omega for calcite, i.e., the   calcite saturation state
   !
 
-#if USE_PRECISION == 2
-#   define SGLE(x)    (x)
-#else
-#   define SGLE(x)    REAL(x)
-#endif
 
   USE msingledouble
   USE mconstants

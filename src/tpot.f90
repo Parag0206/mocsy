@@ -10,11 +10,6 @@ SUBROUTINE tpot(salt, tempis, press, pressref, N, tempot)
   !    Compute potential temperature from arrays of in situ temp, salinity, and pressure.
   !    Needed because sw_ptmp is a function
 
-#if USE_PRECISION == 2
-#   define SGLE(x)    (x)
-#else
-#   define SGLE(x)    REAL(x)
-#endif
 
   USE msingledouble
   USE msw_ptmp

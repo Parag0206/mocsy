@@ -4,11 +4,6 @@
 MODULE meos
 CONTAINS
 
-#if USE_PRECISION == 2
-#   define SGLE(x)    (x)
-#else
-#   define SGLE(x)    REAL(x)
-#endif
 
 SUBROUTINE sa2sp_chem(SA, TA, DIC, NO3, SIOH4, N, SP)
 ! sa2sp_chem:             From Absolute to Practical Salinity

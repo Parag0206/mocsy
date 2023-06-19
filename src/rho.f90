@@ -8,11 +8,6 @@ FUNCTION rho(salt, temp, pbar)
 
   ! Compute in situ density from salinity (psu), in situ temperature (C), & pressure (bar)
 
-#if USE_PRECISION == 2
-#   define SGLE(x)    (x)
-#else
-#   define SGLE(x)    REAL(x)
-#endif
 
   USE msingledouble
   IMPLICIT NONE
