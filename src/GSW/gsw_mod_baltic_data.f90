@@ -11,11 +11,11 @@ implicit none
 real (r8), dimension(2) :: xb_right, yb_right
 real (r8), dimension(3) :: xb_left, yb_left
 
-data xb_left  /12.6_r8,  7.0_r8, 26.0_r8/
-data yb_left  /50.0_r8, 59.0_r8, 69.0_r8/
+data xb_left  /12.6,  7.0, 26.0/
+data yb_left  /50.0, 59.0, 69.0/
 
-data xb_right /45.0_r8, 26.0_r8/
-data yb_right /50.0_r8, 69.0_r8/
+data xb_right /45.0, 26.0/
+data yb_right /50.0, 69.0/
 
 end module
 

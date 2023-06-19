@@ -13,12 +13,12 @@ from netCDF4 import Dataset
 
 def float2string(val, sformat, addcomma):
     if math.isnan(val):
-        str_val = "9e90_r8"
+        str_val = "9e90"
     else:
         str_val = sformat % val
         if str_val.find(".") < 0 and str_val.find("e") < 0 :
             str_val += "."
-        str_val += "_r8"
+        str_val += ""
     if addcomma:
         str_val += ", "
     return str_val;
@@ -206,8 +206,8 @@ integer, dimension(4) :: deli = (/0,1,1,0/), delj = (/0,0,1,1/)
 integer, parameter :: npan = 6
 real (r8), dimension(npan) :: longs_pan, lats_pan
 
-data longs_pan /260.00_r8, 272.59_r8, 276.50_r8, 278.65_r8, 280.73_r8, 292.0_r8/
-data  lats_pan / 19.55_r8,  13.97_r8,   9.60_r8,   8.10_r8,   9.33_r8,   3.4_r8/
+data longs_pan /260.00, 272.59, 276.50, 278.65, 280.73, 292.0/
+data  lats_pan / 19.55,  13.97,   9.60,   8.10,   9.33,   3.4/
 
 """)
 

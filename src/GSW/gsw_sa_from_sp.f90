@@ -32,7 +32,7 @@ character (*), parameter :: func_name = "gsw_sa_from_sp"
 
 sa_baltic = gsw_sa_from_sp_baltic(sp,long,lat)
 
-if (sa_baltic .lt. 1e10_r8) then
+if (sa_baltic .lt. 1e10) then
 
    gsw_sa_from_sp = sa_baltic
 
@@ -42,7 +42,7 @@ else
    if (saar .gt. gsw_error_limit) then
       gsw_sa_from_sp = gsw_error_code(1,func_name,saar)
    else
-      gsw_sa_from_sp = gsw_ups*sp*(1.0_r8 + saar)
+      gsw_sa_from_sp = gsw_ups*sp*(1.0 + saar)
    end if
 
 end if

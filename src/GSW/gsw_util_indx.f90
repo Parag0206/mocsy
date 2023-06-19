@@ -25,7 +25,7 @@ if(z.gt.x(1).and.z.lt.x(n)) then
    kl=1
    ku=n
    do while (ku-kl.gt.1)
-      km=0.5_r8*(ku+kl)
+      km=0.5*(ku+kl)
       if(z.gt.x(km)) then
          kl=km
       else

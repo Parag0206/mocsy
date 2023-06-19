@@ -29,8 +29,8 @@ real (r8) :: gsw_specvol
 real (r8) :: xs, ys, z
 
 xs = sqrt(gsw_sfac*sa + offset)
-ys = ct*0.025_r8
-z = p*1e-4_r8
+ys = ct*0.025
+z = p*1e-4
 
 gsw_specvol = v000 + xs*(v010 + xs*(v020 + xs*(v030 + xs*(v040 + xs*(v050 &
     + v060*xs))))) + ys*(v100 + xs*(v110 + xs*(v120 + xs*(v130 + xs*(v140 &

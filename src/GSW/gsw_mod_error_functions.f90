@@ -9,7 +9,7 @@ implicit none
 logical, public :: gsw_error_check = .true.
 logical, public :: gsw_abort_on_error = .true.
 
-real (r8), parameter, public :: gsw_error_limit = 1e10_r8
+real (r8), parameter, public :: gsw_error_limit = 1e10
 
 integer, parameter, private :: nfuncs = 39
 integer, parameter, private :: maxlen = 40
@@ -85,12 +85,12 @@ contains
     real (r8) :: gsw_error_code, base_code, mult
 
     if (present(error_code)) then
-        k = int(error_code/1.0e14_r8) - 90
-	base_code = error_code + 1.0e14_r8
-	mult = 10.0_r8**(11-k*3)
+        k = int(error_code/1.0e14) - 90
+	base_code = error_code + 1.0e14
+	mult = 10.0**(11-k*3)
     else
-        base_code = 9.1e15_r8
-	mult = 1.0e11_r8
+        base_code = 9.1e15
+	mult = 1.0e11
     end if
 
     ival = err_num*100 + gsw_error_fnum(func_name)
@@ -139,8 +139,8 @@ contains
 
     print '(/"Trace for error code: ", es20.13/)', error_code
 
-    base_code = error_code - 9.0e15_r8
-    k = int(base_code/1.0e14_r8)
+    base_code = error_code - 9.0e15
+    k = int(base_code/1.0e14)
     base_code = base_code/(10**(14-k*3))
 
     do i = 1, k

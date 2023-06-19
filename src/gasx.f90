@@ -340,11 +340,11 @@ SUBROUTINE flxco2(co2flux, co2ex, dpco2,                                        
 
 ! Compute flux, absolute rate of change of surface DIC, & Delta pCO2
   DO i = 1, N
-     IF (co3(i) .eq. 1.e20_r8) THEN
+     IF (co3(i) .eq. 1.e20) THEN
 !       Masked values (land)
-        co2flux(i) = 1.e20_r8
-        co2ex(i)   = 1.e20_r8
-        dpco2(i)   = 1.e20_r8
+        co2flux(i) = 1.e20
+        co2ex(i)   = 1.e20
+        dpco2(i)   = 1.e20
      ELSE
         dtemp = DBLE(temp(i))
         tk = dtemp + 273.15d0
@@ -355,10 +355,10 @@ SUBROUTINE flxco2(co2flux, co2ex, dpco2,                                        
 
 !       Surface K0 [(mol/kg) / atm] at T, S of surface water
         tmp = 9345.17d0*invtk - 60.2409d0 + 23.3585d0 * LOG(tk/100.0d0)
-        K0 = EXP( tmp + DBLE(salprac(i))*(0.023517d0 - 0.00023656d0*tk + 0.0047036e-4_r8*tk*tk) )
+        K0 = EXP( tmp + DBLE(salprac(i))*(0.023517d0 - 0.00023656d0*tk + 0.0047036e-4*tk*tk) )
 
 !       "Atmospheric" [CO2*], air-sea CO2 flux, sfc DIC rate of change, & Delta pCO2
-        co2starair = K0 * DBLE(fco2atm(i)) * 1.0e-6_r8 * DBLE(rhoSW(i)) !Equil. [CO2*] for atm CO2 at Patm & sfc-water T,S [mol/m3]
+        co2starair = K0 * DBLE(fco2atm(i)) * 1.0e-6 * DBLE(rhoSW(i)) !Equil. [CO2*] for atm CO2 at Patm & sfc-water T,S [mol/m3]
         co2star = DBLE(co2(i))                                          !Oceanic [CO2*] in [mol/m3] from vars.f90
         co2flux(i) = (kwco2 * (co2starair - co2star))               !Air-sea CO2 flux [mol/(m2 * s)]
         co2ex(i) = co2flux(i) / dz1                                     !Change in sfc DIC due to gas exchange [mol/[m3 * s)]
@@ -472,7 +472,7 @@ FUNCTION sccfc11(temp)
    REAL(kind=8), INTENT(in) :: temp
    REAL(kind=8) :: sccfc11
 
-   sccfc11 = 3579.2_r8 - 222.63_r8*temp + 7.5749_r8*temp**2 - 0.14595_r8*temp**3  + 0.0011874_r8*temp**4
+   sccfc11 = 3579.2 - 222.63*temp + 7.5749*temp**2 - 0.14595*temp**3  + 0.0011874*temp**4
    
    RETURN
 END FUNCTION sccfc11
@@ -490,7 +490,7 @@ FUNCTION sccfc12(Tc)
    REAL(kind=8), INTENT(in) :: Tc
    REAL(kind=8) :: sccfc12
 
-   sccfc12 = 3828.1_r8 - 249.86_r8*Tc + 8.7603_r8*Tc**2 - 0.1716_r8*Tc**3   + 0.001408_r8*Tc**4
+   sccfc12 = 3828.1 - 249.86*Tc + 8.7603*Tc**2 - 0.1716*Tc**3   + 0.001408*Tc**4
       
    RETURN
 END FUNCTION sccfc12
@@ -508,7 +508,7 @@ FUNCTION scsf6(Tc)
    REAL(kind=8), INTENT(in) :: Tc
    REAL(kind=8) :: scsf6
 
-   scsf6 = 3177.5_r8 - 200.57_r8*Tc + 6.8865_r8*Tc**2 - 0.13335_r8*Tc**3 + 0.0010877_r8*Tc**4
+   scsf6 = 3177.5 - 200.57*Tc + 6.8865*Tc**2 - 0.13335*Tc**3 + 0.0010877*Tc**4
       
    RETURN
 END FUNCTION scsf6
@@ -526,7 +526,7 @@ FUNCTION scco2(Tc)
    REAL(kind=8), INTENT(in) :: Tc
    REAL(kind=8) :: scco2
 
-   scco2 = 2116.8_r8 - 136.25_r8*Tc + 4.7353_r8*Tc**2 - 0.092307_r8*Tc**3 + 0.0007555_r8*Tc**4
+   scco2 = 2116.8 - 136.25*Tc + 4.7353*Tc**2 - 0.092307*Tc**3 + 0.0007555*Tc**4
 
    RETURN
 END FUNCTION scco2
@@ -544,7 +544,7 @@ FUNCTION sco2(Tc)
    REAL(kind=8), INTENT(in) :: Tc
    REAL(kind=8) :: sco2
 
-   sco2 = 1920.4_r8 - 135.6_r8*Tc  + 5.2122_r8*Tc**2 - 0.10939_r8*Tc**3  + 0.00093777_r8*Tc**4
+   sco2 = 1920.4 - 135.6*Tc  + 5.2122*Tc**2 - 0.10939*Tc**3  + 0.00093777*Tc**4
 
    RETURN
 END FUNCTION sco2
@@ -966,14 +966,14 @@ SUBROUTINE o2sato(T, S, N, o2sat_molm3)
   REAL(kind=8) :: tt, tk, ts, ts2, ts3, ts4, ts5
   INTEGER :: i
   
-  DATA A0/ 2.00907_r8   /, A1/ 3.22014_r8   /, A2/ 4.05010_r8 /,  &
-       A3/ 4.94457_r8   /, A4/-2.56847E-1_r8/, A5/ 3.88767_r8 /
-  DATA B0/-6.24523E-3_r8/, B1/-7.37614E-3_r8/, B2/-1.03410E-2_r8/, B3/-8.17083E-3_r8/
-  DATA C0/-4.88682E-7_r8/
+  DATA A0/ 2.00907   /, A1/ 3.22014   /, A2/ 4.05010 /,  &
+       A3/ 4.94457   /, A4/-2.56847E-1/, A5/ 3.88767 /
+  DATA B0/-6.24523E-3/, B1/-7.37614E-3/, B2/-1.03410E-2/, B3/-8.17083E-3/
+  DATA C0/-4.88682E-7/
       
   DO i = 1, N
-      tt  = 298.15_r8 - T(i)
-      tk  = 273.15_r8 + T(i)
+      tt  = 298.15 - T(i)
+      tk  = 273.15 + T(i)
       ts  = LOG(tt/tk)
 
       ts2 = ts**2
@@ -988,7 +988,7 @@ SUBROUTINE o2sato(T, S, N, o2sat_molm3)
       o2sat_mlL = EXP(tmp)
 
 !     Convert from ml/L to mol/m^3
-      o2sat_molm3(i) = o2sat_mlL / 22391.6_r8*1000.0_r8
+      o2sat_molm3(i) = o2sat_mlL / 22391.6*1000.0
   END DO
    
   RETURN
@@ -1060,7 +1060,7 @@ SUBROUTINE o2flux(T, S, kw660, ppo, o2, dz1, N, o2ex)
 
   DO i = 1, N
 !     Transfer velocity for O2 in m/s [4]
-      kwo2 = (kw660(i) * (660._r8/sco2(T(i)))**0.5)
+      kwo2 = (kw660(i) * (660./sco2(T(i)))**0.5)
       
 !     O2 saturation concentration at given atm pressure [3]
       o2sat = o2sat_1atm(i) * ppo(i)

@@ -163,7 +163,7 @@ SUBROUTINE varsolver(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,            
   IF (H > 0.d0) THEN
      pH = -1.*LOG10(H)
   ELSE
-     pH = 1.e20_r8
+     pH = 1.e20
   ENDIF
 
 ! Compute carbonate Alk (Ac) by difference: from total Alk and other Alk components
@@ -190,7 +190,7 @@ SUBROUTINE varsolver(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,            
 
 ! Determine CO2 fugacity [uatm]
 ! NOTE: equation just below requires CO2* in mol/kg
-  fCO2 = cu * 1.e6_r8/K0
+  fCO2 = cu * 1.e6/K0
 
 ! Determine CO2 partial pressure from CO2 fugacity [uatm]
   tk = 273.15d0 + temp
@@ -218,18 +218,18 @@ SUBROUTINE varsolver(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,            
   ENDIF
 
 ! Now that we have T and P in the right form, continue with calculation of fugacity coefficient (and pCO2)
-  Rgas_atm = 82.05736_r8      ! (cm3 * atm) / (mol * K)  CODATA (2006)
+  Rgas_atm = 82.05736      ! (cm3 * atm) / (mol * K)  CODATA (2006)
 ! To compute fugcoeff, we need 3 other terms (B, Del, xc2) in addition to 3 others above (tk, Ptot, Rgas_atm)
   B = -1636.75d0 + 12.0408d0*tk0 - 0.0327957d0*(tk0*tk0) + 0.0000316528d0*(tk0*tk0*tk0)
   Del = 57.7d0 - 0.118d0*tk0
 ! "x2" term often neglected (assumed = 1) in applications of Weiss's (1974) equation 9
 ! x2 = 1 - x1 = 1 - xCO2 (it is very close to 1, but not quite)
 ! Let's assume that xCO2 = fCO2. Resulting fugcoeff is identical to 8th digit after the decimal.
-  xCO2approx = fCO2 * 1.e-6_r8
+  xCO2approx = fCO2 * 1.e-6
   IF (trim(opGAS) == 'Pinsitu' .OR. trim(opGAS) == 'pinsitu') THEN
-!    xCO2approx = 400.0e-6_r8      !a simple test (gives about same result as seacarb for pCO2insitu)
+!    xCO2approx = 400.0e-6      !a simple test (gives about same result as seacarb for pCO2insitu)
 !    approximate surface xCO2 ~ surface fCO2 (i.e., in situ fCO2 d by exponential pressure correction)
-     xCO2approx = xCO2approx * exp( ((1-Ptot)*32.3_r8)/(82.05736_r8*tk0) )   ! of K0 press. correction, see Weiss (1974, equation 5)
+     xCO2approx = xCO2approx * exp( ((1-Ptot)*32.3)/(82.05736*tk0) )   ! of K0 press. correction, see Weiss (1974, equation 5)
   ENDIF
   xc2 = (1.0d0 - xCO2approx)**2 
   fugcoeff = exp( Ptot*(B + 2.0d0*xc2*Del)/(Rgas_atm*tk0) )
@@ -416,7 +416,7 @@ SUBROUTINE varsolver_DNAD (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,      
   IF (H > 0.d0) THEN
      pH = -1.*LOG10(H)
   ELSE
-     pH = 1.e20_r8
+     pH = 1.e20
   ENDIF
 
 ! Compute carbonate Alk (Ac) by difference: from total Alk and other Alk components
@@ -443,7 +443,7 @@ SUBROUTINE varsolver_DNAD (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,      
 
 ! Determine CO2 fugacity [uatm]
 ! NOTE: equation just below requires CO2* in mol/kg
-  fCO2 = cu * 1.e6_r8/K0
+  fCO2 = cu * 1.e6/K0
 
 ! Determine CO2 partial pressure from CO2 fugacity [uatm]
   tk = 273.15d0 + temp
@@ -471,18 +471,18 @@ SUBROUTINE varsolver_DNAD (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,      
   ENDIF
 
 ! Now that we have T and P in the right form, continue with calculation of fugacity coefficient (and pCO2)
-  Rgas_atm = 82.05736_r8      ! (cm3 * atm) / (mol * K)  CODATA (2006)
+  Rgas_atm = 82.05736      ! (cm3 * atm) / (mol * K)  CODATA (2006)
 ! To compute fugcoeff, we need 3 other terms (B, Del, xc2) in addition to 3 others above (tk, Ptot, Rgas_atm)
   B = -1636.75d0 + 12.0408d0*tk0 - 0.0327957d0*(tk0*tk0) + 0.0000316528d0*(tk0*tk0*tk0)
   Del = 57.7d0 - 0.118d0*tk0
 ! "x2" term often neglected (assumed = 1) in applications of Weiss's (1974) equation 9
 ! x2 = 1 - x1 = 1 - xCO2 (it is very close to 1, but not quite)
 ! Let's assume that xCO2 = fCO2. Resulting fugcoeff is identical to 8th digit after the decimal.
-  xCO2approx = fCO2 * 1.e-6_r8
+  xCO2approx = fCO2 * 1.e-6
   IF (trim(opGAS) == 'Pinsitu' .OR. trim(opGAS) == 'pinsitu') THEN
-!    xCO2approx = 400.0e-6_r8      !a simple test (gives about same result as seacarb for pCO2insitu)
+!    xCO2approx = 400.0e-6      !a simple test (gives about same result as seacarb for pCO2insitu)
 !    approximate surface xCO2 ~ surface fCO2 (i.e., in situ fCO2 d by exponential pressure correction)
-     xCO2approx = xCO2approx * exp( ((1-Ptot)*32.3_r8)/(82.05736_r8*tk0) )   ! of K0 press. correction, see Weiss (1974, equation 5)
+     xCO2approx = xCO2approx * exp( ((1-Ptot)*32.3)/(82.05736*tk0) )   ! of K0 press. correction, see Weiss (1974, equation 5)
   ENDIF
   xc2 = (1.0d0 - xCO2approx)**2 
   fugcoeff = exp( Ptot*(B + 2.0d0*xc2*Del)/(Rgas_atm*tk0) )

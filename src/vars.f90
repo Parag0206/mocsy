@@ -462,17 +462,17 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
 !       This is the case for most models and some data
 !       a) Convert the pot. temp on today's "ITS 90" scale to older IPTS 68 scale
 !          (see Dickson et al., Best Practices Guide, 2007, Chap. 5, p. 7, including footnote)
-        tempot68 = (tempot - 0.0002_r8) / 0.99975_r8
+        tempot68 = (tempot - 0.0002) / 0.99975
 !       b) Compute "in-situ Temperature" from "Potential Temperature" (both on IPTS 68)
         tempis68 = sw_temp(sal(i), (tempot68), p(i), (0.d0) )
 !       c) Convert the in-situ temp on older IPTS 68 scale to modern scale (ITS 90)
-        tempis90 = 0.99975*tempis68 + 0.0002_r8
+        tempis90 = 0.99975*tempis68 + 0.0002
 !       Note: parts (a) and (c) above are tiny corrections;
 !             part  (b) is a big correction for deep waters (but zero at surface)
      ELSEIF (trim(optT) == 'Tinsitu' .OR. trim(optT) == 'tinsitu') THEN
 !       When optT = 'Tinsitu', tempis is input & output (no tempot needed)
         tempis90 = DBLE(temp(i))
-        tempis68  = (tempis90 - 0.0002_r8) / 0.99975_r8
+        tempis68  = (tempis90 - 0.0002) / 0.99975
 !       dtempot68 = sw_ptmp(DBLE(sal(i)), DBLE(tempis68), DBLE(p), 0.0d0)
 !       dtempot   = 0.99975*dtempot68 + 0.0002
      ELSEIF (trim(optT) == 'Tcsv' .OR. trim(optT) == 'tcsv') THEN
@@ -488,7 +488,7 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
         END IF
         ! Then convert temperature
         tempis90 = gsw_t_from_ct (DBLE(sabs1(1)), DBLE(temp(i)), DBLE(p(i)))
-        tempis68  = (tempis90 - 0.0002_r8) / 0.99975_r8
+        tempis68  = (tempis90 - 0.0002) / 0.99975
      ELSE
         PRINT *,"optT must be either 'Tpot, 'Tinsitu' or 'Tcsv'"
         PRINT *,"you specified optT =", trim(optT) 
@@ -502,43 +502,43 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
      IF (dic(i) > 0. .AND. dic(i) < 1.0e+4) THEN
 !       Test to indicate if any of input variables are unreasonable
         IF (verbosity .EQV. .true.) THEN
-            IF (       sal(i) < 0.0_r8  &
-                 .OR.  alk(i) < 0.0_r8  &
-                 .OR.  dic(i) < 0.0_r8  &
-                 .OR.  sil(i) < 0.0_r8  &
-                 .OR. phos(i) < 0.0_r8  &
-                 .OR.  sal(i) > 1e+3_r8 &
-                 .OR.  alk(i) > 1e+3_r8 &
-                 .OR.  dic(i) > 1e+3_r8 &
-                 .OR.  sil(i) > 1e+3_r8 &
-                 .OR. phos(i) > 1e+3_r8) THEN
+            IF (       sal(i) < 0.0  &
+                 .OR.  alk(i) < 0.0  &
+                 .OR.  dic(i) < 0.0  &
+                 .OR.  sil(i) < 0.0  &
+                 .OR. phos(i) < 0.0  &
+                 .OR.  sal(i) > 1e+3 &
+                 .OR.  alk(i) > 1e+3 &
+                 .OR.  dic(i) > 1e+3 &
+                 .OR.  sil(i) > 1e+3 &
+                 .OR. phos(i) > 1e+3) THEN
                PRINT *, 'i, icount, tempot, sal,    alk,    dic,    sil,    phos =', &
                          i, icount, tempot, sal(i), alk(i), dic(i), sil(i), phos(i)
             ENDIF
         ENDIF
 !       Zero out any negative salinity, phosphate, silica, dic, and alk
-        IF (sal(i) < 0.0_r8) THEN
-           ssal = 0.0_r8
+        IF (sal(i) < 0.0) THEN
+           ssal = 0.0
         ELSE
            ssal = sal(i)
         ENDIF
-        IF (phos(i) < 0.0_r8) THEN
-           sphos = 0.0_r8
+        IF (phos(i) < 0.0) THEN
+           sphos = 0.0
         ELSE
            sphos = phos(i)
         ENDIF
-        IF (sil(i) < 0.0_r8) THEN
-           ssil = 0.0_r8
+        IF (sil(i) < 0.0) THEN
+           ssil = 0.0
         ELSE
            ssil = sil(i)
         ENDIF
-        IF (dic(i) < 0.0_r8) THEN
-          sdic = 0.0_r8
+        IF (dic(i) < 0.0) THEN
+          sdic = 0.0
         ELSE
           sdic = dic(i)
         ENDIF
-        IF (alk(i) < 0.0_r8) THEN
-          salk = 0.0_r8
+        IF (alk(i) < 0.0) THEN
+          salk = 0.0
         ELSE
           salk = alk(i)
         ENDIF
@@ -604,7 +604,7 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
            ! If longitude is passed in
            IF (PRESENT(lon)) THEN
                p1(1) = p(i)
-               IF (lon(i) .NE. 1.e20_r8) THEN
+               IF (lon(i) .NE. 1.e20) THEN
                   ! longitude and latitude are defined
                   lon1(1) = lon(i)
                   lat1(1) = lat(i)
@@ -675,18 +675,18 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
 
      ELSE
 
-        ph(i)     = 1.e20_r8
-        pco2(i)   = 1.e20_r8
-        fco2(i)   = 1.e20_r8
-        co2(i)    = 1.e20_r8
-        hco3(i)   = 1.e20_r8
-        co3(i)    = 1.e20_r8
-        OmegaA(i) = 1.e20_r8
-        OmegaC(i) = 1.e20_r8
-        BetaD(i)  = 1.e20_r8
-        rhoSW(i)  = 1.e20_r8
-        p(i)      = 1.e20_r8
-        tempis(i) = 1.e20_r8
+        ph(i)     = 1.e20
+        pco2(i)   = 1.e20
+        fco2(i)   = 1.e20
+        co2(i)    = 1.e20
+        hco3(i)   = 1.e20
+        co3(i)    = 1.e20
+        OmegaA(i) = 1.e20
+        OmegaC(i) = 1.e20
+        BetaD(i)  = 1.e20
+        rhoSW(i)  = 1.e20
+        p(i)      = 1.e20
+        tempis(i) = 1.e20
 
      ENDIF
 
@@ -954,7 +954,7 @@ SUBROUTINE vars_pertK(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,       &
      ELSEIF (trim(optT) == 'Tinsitu' .OR. trim(optT) == 'tinsitu') THEN
 !       When optT = 'Tinsitu', tempis is input & output (no tempot needed)
         tempis90 = DBLE(temp(i))
-        tempis68  = (tempis90 - 0.0002_r8) / 0.99975_r8
+        tempis68  = (tempis90 - 0.0002) / 0.99975
 !       dtempot68 = sw_ptmp(DBLE(sal(i)), DBLE(tempis68), DBLE(p), 0.0d0)
 !       dtempot   = 0.99975*dtempot68 + 0.0002
      ELSEIF (trim(optT) == 'Tcsv' .OR. trim(optT) == 'tcsv') THEN
@@ -970,7 +970,7 @@ SUBROUTINE vars_pertK(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,       &
         END IF
         ! Then convert temperature
         tempis90 = gsw_t_from_ct (DBLE(sabs1(1)), DBLE(temp(i)), DBLE(p))
-        tempis68  = (tempis90 - 0.0002_r8) / 0.99975_r8
+        tempis68  = (tempis90 - 0.0002) / 0.99975
      ELSE
         PRINT *,"optT must be either 'Tpot, 'Tinsitu' or 'Tcsv'"
         PRINT *,"you specified optT =", trim(optT) 
@@ -1085,7 +1085,7 @@ SUBROUTINE vars_pertK(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,       &
            ! If longitude is passed in
            IF (PRESENT(lon)) THEN
                p1(1) = p
-               IF (lon(i) .NE. 1e20_r8) THEN
+               IF (lon(i) .NE. 1e20) THEN
                   ! longitude and latitude are defined
                   lon1(1) = lon(i)
                   lat1(1) = lat(i)
@@ -1155,14 +1155,14 @@ SUBROUTINE vars_pertK(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,       &
 
      ELSE
 
-        ph(i)     = 1.e20_r8
-        pco2(i)   = 1.e20_r8
-        fco2(i)   = 1.e20_r8
-        co2(i)    = 1.e20_r8
-        hco3(i)   = 1.e20_r8
-        co3(i)    = 1.e20_r8
-        OmegaA(i) = 1.e20_r8
-        OmegaC(i) = 1.e20_r8
+        ph(i)     = 1.e20
+        pco2(i)   = 1.e20
+        fco2(i)   = 1.e20
+        co2(i)    = 1.e20
+        hco3(i)   = 1.e20
+        co3(i)    = 1.e20
+        OmegaA(i) = 1.e20
+        OmegaC(i) = 1.e20
 
      ENDIF
 

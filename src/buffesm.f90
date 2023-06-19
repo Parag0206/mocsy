@@ -320,15 +320,15 @@ SUBROUTINE buffesm(gammaDIC, betaDIC, omegaDIC, gammaALK, betaALK, omegaALK, Rf,
 !  Compute buffer factors
 !  ----------------------
    DO i=1,N
-      IF (ph(i) .EQ. 1.e20_r8) THEN
+      IF (ph(i) .EQ. 1.e20) THEN
          ! Missing input data, thus mask values
-         gammaDIC(i)   = 1.e20_r8
-         betaDIC(i)    = 1.e20_r8
-         omegaDIC(i)   = 1.e20_r8
-         gammaALK(i)   = 1.e20_r8
-         betaALK(i)    = 1.e20_r8
-         omegaALK(i)   = 1.e20_r8
-         Rf(i)         = 1.e20_r8
+         gammaDIC(i)   = 1.e20
+         betaDIC(i)    = 1.e20
+         omegaDIC(i)   = 1.e20
+         gammaALK(i)   = 1.e20
+         betaALK(i)    = 1.e20
+         omegaALK(i)   = 1.e20
+         Rf(i)         = 1.e20
       ELSE
          ! Compute buffer factors
 

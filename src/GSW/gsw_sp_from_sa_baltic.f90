@@ -36,13 +36,13 @@ if (xb_left(2).lt.long .and. long.lt.xb_right(1) .and. &
     xx_right = gsw_util_xinterp1(yb_right, xb_right, 2, lat)
     
     if(xx_left.le.long .and. long.le.xx_right) then
-        gsw_sp_from_sa_baltic = (35.0_r8/(gsw_sso - 0.087_r8))*(sa - 0.087_r8)
+        gsw_sp_from_sa_baltic = (35.0/(gsw_sso - 0.087))*(sa - 0.087)
     else
-        gsw_sp_from_sa_baltic = 9e15_r8
+        gsw_sp_from_sa_baltic = 9e15
     end if
      
 else
-    gsw_sp_from_sa_baltic = 9e15_r8
+    gsw_sp_from_sa_baltic = 9e15
 end if
 
 return

@@ -28,7 +28,7 @@ real (r8), intent(in) :: sa, ct, p
 
 real (r8) :: gsw_rho
 
-gsw_rho = 1.0_r8/gsw_specvol(sa,ct,p)
+gsw_rho = 1.0/gsw_specvol(sa,ct,p)
 
 return
 end function

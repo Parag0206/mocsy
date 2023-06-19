@@ -235,22 +235,22 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   ! index: 1) K1 , 2) K2, 3) Kb, 4) Kw, 5) Ks, 6) Kf, 7) Kspc, 8) Kspa,
   !            9) K1P, 10) K2P, 11) K3P, 12) Ksi
 
-  DATA a0 /-25.5_r8, -15.82_r8, -29.48_r8, -20.02_r8, &
-          -18.03_r8,  -9.78_r8, -48.76_r8, -45.96_r8, &
-          -14.51_r8, -23.12_r8, -26.57_r8, -29.48_r8/
-  DATA a1 /0.1271_r8, -0.0219_r8, 0.1622_r8, 0.1119_r8, &
-           0.0466_r8, -0.0090_r8, 0.5304_r8, 0.5304_r8, &
-           0.1211_r8, 0.1758_r8, 0.2020_r8, 0.1622_r8/
-  DATA a2 /     0.0_r8,       0.0_r8, -2.608e-3_r8, -1.409e-3_r8, &
-           0.316e-3_r8, -0.942e-3_r8,  0.0_r8,       0.0_r8, &
-          -0.321e-3_r8, -2.647e-3_r8, -3.042e-3_r8, -2.6080e-3_r8/
-  DATA b0 /-3.08e-3_r8, 1.13e-3_r8,  -2.84e-3_r8,   -5.13e-3_r8, &
-           -4.53e-3_r8, -3.91e-3_r8, -11.76e-3_r8, -11.76e-3_r8, &
-           -2.67e-3_r8, -5.15e-3_r8,  -4.08e-3_r8,  -2.84e-3_r8/
-  DATA b1 /0.0877e-3_r8, -0.1475e-3_r8, 0.0_r8,       0.0794e-3_r8, &
-           0.09e-3_r8,    0.054e-3_r8,  0.3692e-3_r8, 0.3692e-3_r8, &
-           0.0427e-3_r8,  0.09e-3_r8,   0.0714e-3_r8, 0.0_r8/
-  DATA b2 /12*0.0_r8/
+  DATA a0 /-25.5, -15.82, -29.48, -20.02, &
+          -18.03,  -9.78, -48.76, -45.96, &
+          -14.51, -23.12, -26.57, -29.48/
+  DATA a1 /0.1271, -0.0219, 0.1622, 0.1119, &
+           0.0466, -0.0090, 0.5304, 0.5304, &
+           0.1211, 0.1758, 0.2020, 0.1622/
+  DATA a2 /     0.0,       0.0, -2.608e-3, -1.409e-3, &
+           0.316e-3, -0.942e-3,  0.0,       0.0, &
+          -0.321e-3, -2.647e-3, -3.042e-3, -2.6080e-3/
+  DATA b0 /-3.08e-3, 1.13e-3,  -2.84e-3,   -5.13e-3, &
+           -4.53e-3, -3.91e-3, -11.76e-3, -11.76e-3, &
+           -2.67e-3, -5.15e-3,  -4.08e-3,  -2.84e-3/
+  DATA b1 /0.0877e-3, -0.1475e-3, 0.0,       0.0794e-3, &
+           0.09e-3,    0.054e-3,  0.3692e-3, 0.3692e-3, &
+           0.0427e-3,  0.09e-3,   0.0714e-3, 0.0/
+  DATA b2 /12*0.0/
 
 ! Set defaults for optional arguments (in Fortran 90)
 ! Note:  Optional arguments with f2py (python) are set above with 
@@ -281,7 +281,7 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
     opS = 'Sprc'
   ENDIF
 
-  R = 83.14472_r8
+  R = 83.14472
 
   icount = 0
   DO i = 1, N
@@ -315,19 +315,19 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
 !       This is the case for most models and some data
 !       a) Convert the pot. temp on today's "ITS 90" scale to older IPTS 68 scale
 !          (see Dickson et al., Best Practices Guide, 2007, Chap. 5, p. 7, including footnote)
-        tempot68 = (tempot - 0.0002_r8) / 0.99975_r8
+        tempot68 = (tempot - 0.0002) / 0.99975
 !       b) Compute "in-situ Temperature" from "Potential Temperature" (both on IPTS 68)
         tempis68 = sw_temp(sal(i), tempot68, p, (0.0D0) )
 !       c) Convert the in-situ temp on older IPTS 68 scale to modern scale (ITS 90)
-        tempis = 0.99975_r8*tempis68 + 0.0002_r8
+        tempis = 0.99975*tempis68 + 0.0002
 !       Note: parts (a) and (c) above are tiny corrections;
 !             part  (b) is a big correction for deep waters (but zero at surface)
      ELSEIF (trim(optT) == 'Tinsitu' .OR. trim(optT) == 'tinsitu') THEN
 !       When optT = 'Tinsitu', tempis is input & output (no tempot needed)
         tempis    = temp(i)
-        tempis68  = (temp(i) - 0.0002_r8) / 0.99975_r8
+        tempis68  = (temp(i) - 0.0002) / 0.99975
         dtempot68 = sw_ptmp(DBLE(sal(i)), DBLE(tempis68), DBLE(p), 0.0d0)
-        dtempot   = 0.99975_r8*dtempot68 + 0.0002_r8
+        dtempot   = 0.99975*dtempot68 + 0.0002
      ELSEIF (trim(optT) == 'Tcsv' .OR. trim(optT) == 'tcsv') THEN
 !       Convert given conservative temperature to in-situ temperature
         ! First convert salinity to absolute sal., if necessary
@@ -341,7 +341,7 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
         END IF
         ! Then convert temperature
         tempis = (gsw_t_from_ct (DBLE(sabs1(1)), DBLE(temp(i)), DBLE(p)))
-        tempis68  = (tempis - 0.0002_r8) / 0.99975_r8
+        tempis68  = (tempis - 0.0002) / 0.99975
      ELSE
         PRINT *,"optT must be either 'Tpot, 'Tinsitu' or 'Tcsv'"
         PRINT *,"you specified optT =", trim(optT) 
@@ -349,7 +349,7 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
      ENDIF
 
 !    Compute constants:
-     IF (temp(i) >= -5.0_r8 .AND. temp(i) < 1.0e+2_r8) THEN
+     IF (temp(i) >= -5.0 .AND. temp(i) < 1.0e+2) THEN
 !       Test to indicate if any of input variables are unreasonable
         IF (      sal(i) < 0.  .OR.  sal(i) > 1e+3) THEN
            PRINT *, 'i, icount, temp, sal =', i, icount, temp(i), sal(i)
@@ -382,10 +382,10 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
                lon1(1) = lon(i)
                lat1(1) = lat(i)
            ELSE
-               lon1(1) = 1.e20_r8
-               lat1(1) = 1.e20_r8
+               lon1(1) = 1.e20
+               lat1(1) = 1.e20
            ENDIF
-           IF (lon1(1) .NE. 1.e20_r8 .AND. lat1(1) .NE. 1.e20_r8) THEN
+           IF (lon1(1) .NE. 1.e20 .AND. lat1(1) .NE. 1.e20) THEN
               ! longitude and latitude are defined
               CALL sa2sp_geo (sabs1, 1, spra1, p1, lon1, lat1)
            ELSE
@@ -447,7 +447,7 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
            STOP
         ENDIF
         tmp = 9345.17d0/tk0 - 60.2409d0 + 23.3585d0 * LOG(tk0/100.0d0)
-        nK0we74 = tmp + s*(0.023517d0 - 0.00023656d0*tk0 + 0.0047036e-4_r8*tk0*tk0)
+        nK0we74 = tmp + s*(0.023517d0 - 0.00023656d0*tk0 + 0.0047036e-4*tk0*tk0)
         K0(i) = EXP(nK0we74)
 
 !       K1 = [H][HCO3]/[H2CO3]
@@ -461,14 +461,14 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
         ELSEIF (trim(opK1K2) == 'm10') THEN
 !         Millero (2010, Mar. Fresh Wat. Res.) (seawater scale)
           pK1o = 6320.813d0*invtk + 19.568224d0*dlogtk -126.34048d0
-          ma1 = 13.4038d0*sqrts + 0.03206d0*s - (5.242e-5_r8)*s2
+          ma1 = 13.4038d0*sqrts + 0.03206d0*s - (5.242e-5)*s2
           mb1 = -530.659d0*sqrts - 5.8210d0*s
           mc1 = -2.0664d0*sqrts
           pK1 = pK1o + ma1 + mb1*invtk + mc1*dlogtk
           K1(i) = 10.0d0**(-pK1) 
 
           pK2o = 5143.692d0*invtk + 14.613358d0*dlogtk -90.18333d0
-          ma2 = 21.3728d0*sqrts + 0.1218d0*s - (3.688e-4_r8)*s2
+          ma2 = 21.3728d0*sqrts + 0.1218d0*s - (3.688e-4)*s2
           mb2 = -788.289d0*sqrts - 19.189d0*s
           mc2 = -3.374d0*sqrts
           pK2 = pK2o + ma2 + mb2*invtk + mc2*dlogtk
@@ -483,7 +483,7 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
           K1(i) = 10.0d0**(-pK1) 
 
           pK2o = 5143.692d0*invtk + 14.613358d0*dlogtk -90.18333d0
-          ma2 = 21.225890d0*sqrts + 0.12450870d0*s - (3.7243e-4_r8)*s2
+          ma2 = 21.225890d0*sqrts + 0.12450870d0*s - (3.7243e-4)*s2
           mb2 = -779.3444d0*sqrts - 19.91739d0*s
           mc2 = -3.3534679d0*sqrts
           pK2 = pK2o + ma2 + mb2*invtk + mc2*dlogtk
@@ -602,8 +602,8 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
              -0.10018d0*s + 0.0059415d0*s15 )
 
 !       Pressure effect on K0 based on Weiss (1974, equation 5)
-        Rgas_atm = 82.05736_r8      ! (cm3 * atm) / (mol * K)  CODATA (2006)
-        vbarCO2 = 32.3_r8           ! partial molal volume (cm3 / mol) from Weiss (1974, Appendix, paragraph 3)
+        Rgas_atm = 82.05736      ! (cm3 * atm) / (mol * K)  CODATA (2006)
+        vbarCO2 = 32.3           ! partial molal volume (cm3 / mol) from Weiss (1974, Appendix, paragraph 3)
         K0(i) = K0(i) * exp( ((1-Ptot)*vbarCO2)/(Rgas_atm*tk0) )   ! Weiss (1974, equation 5)
 
 !       Pressure effect on all other K's (based on Millero, (1995)
@@ -680,22 +680,22 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
 
      ELSE
 
-        K0(i)   = 1.e20_r8
-        K1(i)   = 1.e20_r8
-        K2(i)   = 1.e20_r8
-        Kb(i)   = 1.e20_r8
-        Kw(i)   = 1.e20_r8
-        Ks(i)   = 1.e20_r8
-        Kf(i)   = 1.e20_r8
-        Kspc(i) = 1.e20_r8
-        Kspa(i) = 1.e20_r8
-        K1p(i)  = 1.e20_r8
-        K2p(i)  = 1.e20_r8
-        K3p(i)  = 1.e20_r8
-        Ksi(i)  = 1.e20_r8
-        Bt(i)   = 1.e20_r8
-        Ft(i)   = 1.e20_r8
-        St(i)   = 1.e20_r8
+        K0(i)   = 1.e20
+        K1(i)   = 1.e20
+        K2(i)   = 1.e20
+        Kb(i)   = 1.e20
+        Kw(i)   = 1.e20
+        Ks(i)   = 1.e20
+        Kf(i)   = 1.e20
+        Kspc(i) = 1.e20
+        Kspa(i) = 1.e20
+        K1p(i)  = 1.e20
+        K2p(i)  = 1.e20
+        K3p(i)  = 1.e20
+        Ksi(i)  = 1.e20
+        Bt(i)   = 1.e20
+        Ft(i)   = 1.e20
+        St(i)   = 1.e20
 
      ENDIF
 
@@ -940,22 +940,22 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   ! index: 1) K1 , 2) K2, 3) Kb, 4) Kw, 5) Ks, 6) Kf, 7) Kspc, 8) Kspa,
   !            9) K1P, 10) K2P, 11) K3P, 12) Ksi
 
-  DATA a0 /-25.5_r8, -15.82_r8, -29.48_r8, -20.02_r8, &
-          -18.03_r8,  -9.78_r8, -48.76_r8, -45.96_r8, &
-          -14.51_r8, -23.12_r8, -26.57_r8, -29.48_r8/
-  DATA a1 /0.1271_r8, -0.0219_r8, 0.1622_r8, 0.1119_r8, &
-           0.0466_r8, -0.0090_r8, 0.5304_r8, 0.5304_r8, &
-           0.1211_r8, 0.1758_r8, 0.2020_r8, 0.1622_r8/
-  DATA a2 /     0.0_r8,       0.0_r8, -2.608e-3_r8, -1.409e-3_r8, &
-           0.316e-3_r8, -0.942e-3_r8,  0.0_r8,       0.0_r8, &
-          -0.321e-3_r8, -2.647e-3_r8, -3.042e-3_r8, -2.6080e-3_r8/
-  DATA b0 /-3.08e-3_r8, 1.13e-3_r8,  -2.84e-3_r8,   -5.13e-3_r8, &
-           -4.53e-3_r8, -3.91e-3_r8, -11.76e-3_r8, -11.76e-3_r8, &
-           -2.67e-3_r8, -5.15e-3_r8,  -4.08e-3_r8,  -2.84e-3_r8/
-  DATA b1 /0.0877e-3_r8, -0.1475e-3_r8, 0.0_r8,       0.0794e-3_r8, &
-           0.09e-3_r8,    0.054e-3_r8,  0.3692e-3_r8, 0.3692e-3_r8, &
-           0.0427e-3_r8,  0.09e-3_r8,   0.0714e-3_r8, 0.0_r8/
-  DATA b2 /12*0.0_r8/
+  DATA a0 /-25.5, -15.82, -29.48, -20.02, &
+          -18.03,  -9.78, -48.76, -45.96, &
+          -14.51, -23.12, -26.57, -29.48/
+  DATA a1 /0.1271, -0.0219, 0.1622, 0.1119, &
+           0.0466, -0.0090, 0.5304, 0.5304, &
+           0.1211, 0.1758, 0.2020, 0.1622/
+  DATA a2 /     0.0,       0.0, -2.608e-3, -1.409e-3, &
+           0.316e-3, -0.942e-3,  0.0,       0.0, &
+          -0.321e-3, -2.647e-3, -3.042e-3, -2.6080e-3/
+  DATA b0 /-3.08e-3, 1.13e-3,  -2.84e-3,   -5.13e-3, &
+           -4.53e-3, -3.91e-3, -11.76e-3, -11.76e-3, &
+           -2.67e-3, -5.15e-3,  -4.08e-3,  -2.84e-3/
+  DATA b1 /0.0877e-3, -0.1475e-3, 0.0,       0.0794e-3, &
+           0.09e-3,    0.054e-3,  0.3692e-3, 0.3692e-3, &
+           0.0427e-3,  0.09e-3,   0.0714e-3, 0.0/
+  DATA b2 /12*0.0/
 
 ! Set defaults for optional arguments (in Fortran 90)
 ! Note:  Optional arguments with f2py (python) are set above with 
@@ -986,7 +986,7 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
     opS = 'Sprc'
   ENDIF
 
-  R = 83.14472_r8
+  R = 83.14472
 
   icount = 0
   DO i = 1, N
@@ -1049,7 +1049,7 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
 !       Sorry but no computation of derivatives because gsw_t_from_ct does not support it.
 !          instead, assume that any derivative d(tempis)/dx is as d(temp)/dx
         tempis%xp_ad_(:) = temp(i)%xp_ad_(:)
-        tempis68  = (tempis - 0.0002_r8) / 0.99975_r8
+        tempis68  = (tempis - 0.0002) / 0.99975
      ELSE
         PRINT *,"optT must be either 'Tpot, 'Tinsitu' or 'Tcsv'"
         PRINT *,"you specified optT =", trim(optT) 
@@ -1090,10 +1090,10 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
                lon1(1) = lon(i)
                lat1(1) = lat(i)
            ELSE
-               lon1(1) = 1.e20_r8
-               lat1(1) = 1.e20_r8
+               lon1(1) = 1.e20
+               lat1(1) = 1.e20
            ENDIF
-           IF (lon1(1) .NE. 1.e20_r8 .AND. lat1(1) .NE. 1.e20_r8) THEN
+           IF (lon1(1) .NE. 1.e20 .AND. lat1(1) .NE. 1.e20) THEN
               ! longitude and latitude are defined
               CALL sa2sp_geo (sabs1, 1, spra1, p1, lon1, lat1)
            ELSE
@@ -1159,7 +1159,7 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
            STOP
         ENDIF
         tmp = 9345.17d0/tk0 - 60.2409d0 + 23.3585d0 * LOG(tk0/100.0d0)
-        nK0we74 = tmp + s*(0.023517d0 - 0.00023656d0*tk0 + 0.0047036e-4_r8*tk0*tk0)
+        nK0we74 = tmp + s*(0.023517d0 - 0.00023656d0*tk0 + 0.0047036e-4*tk0*tk0)
         K0(i) = EXP(nK0we74)
 
 !       K1 = [H][HCO3]/[H2CO3]
@@ -1314,8 +1314,8 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
              -0.10018d0*s + 0.0059415d0*s15 )
 
 !       Pressure effect on K0 based on Weiss (1974, equation 5)
-        Rgas_atm = 82.05736_r8      ! (cm3 * atm) / (mol * K)  CODATA (2006)
-        vbarCO2 = 32.3_r8           ! partial molal volume (cm3 / mol) from Weiss (1974, Appendix, paragraph 3)
+        Rgas_atm = 82.05736      ! (cm3 * atm) / (mol * K)  CODATA (2006)
+        vbarCO2 = 32.3           ! partial molal volume (cm3 / mol) from Weiss (1974, Appendix, paragraph 3)
         K0(i) = K0(i) * exp( ((1-Ptot)*vbarCO2)/(Rgas_atm*tk0) )   ! Weiss (1974, equation 5)
 
 !       Pressure effect on all other K's (based on Millero, (1995)
@@ -1392,22 +1392,22 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
 
      ELSE
 
-        K0(i)   = 1.e20_r8
-        K1(i)   = 1.e20_r8
-        K2(i)   = 1.e20_r8
-        Kb(i)   = 1.e20_r8
-        Kw(i)   = 1.e20_r8
-        Ks(i)   = 1.e20_r8
-        Kf(i)   = 1.e20_r8
-        Kspc(i) = 1.e20_r8
-        Kspa(i) = 1.e20_r8
-        K1p(i)  = 1.e20_r8
-        K2p(i)  = 1.e20_r8
-        K3p(i)  = 1.e20_r8
-        Ksi(i)  = 1.e20_r8
-        Bt(i)   = 1.e20_r8
-        Ft(i)   = 1.e20_r8
-        St(i)   = 1.e20_r8
+        K0(i)   = 1.e20
+        K1(i)   = 1.e20
+        K2(i)   = 1.e20
+        Kb(i)   = 1.e20
+        Kw(i)   = 1.e20
+        Ks(i)   = 1.e20
+        Kf(i)   = 1.e20
+        Kspc(i) = 1.e20
+        Kspa(i) = 1.e20
+        K1p(i)  = 1.e20
+        K2p(i)  = 1.e20
+        K3p(i)  = 1.e20
+        Ksi(i)  = 1.e20
+        Bt(i)   = 1.e20
+        Ft(i)   = 1.e20
+        St(i)   = 1.e20
 
      ENDIF
 

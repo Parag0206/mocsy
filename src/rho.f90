@@ -49,15 +49,15 @@ FUNCTION rho(salt, temp, pbar)
   X = T
 
 ! Density of pure water
-  rhow = 999.842594d0 + 6.793952e-2_r8*X          &
-       -9.095290e-3_r8*X*X + 1.001685e-4_r8*X**3  &
-       -1.120083e-6_r8*X**4 + 6.536332e-9_r8*X**5
+  rhow = 999.842594d0 + 6.793952e-2*X          &
+       -9.095290e-3*X*X + 1.001685e-4*X**3  &
+       -1.120083e-6*X**4 + 6.536332e-9*X**5
 
 ! Density of seawater at 1 atm, P=0
-  A = 8.24493e-1_r8 - 4.0899e-3_r8*X                         &
-       + 7.6438e-5_r8*X*X - 8.2467e-7_r8*X**3 + 5.3875e-9_r8*X**4
-  B = -5.72466e-3_r8 + 1.0227e-4_r8*X - 1.6546e-6_r8*X*X
-  C = 4.8314e-4_r8
+  A = 8.24493e-1 - 4.0899e-3*X                         &
+       + 7.6438e-5*X*X - 8.2467e-7*X**3 + 5.3875e-9*X**4
+  B = -5.72466e-3 + 1.0227e-4*X - 1.6546e-6*X*X
+  C = 4.8314e-4
 
   rho0 = rhow + A*S + B*S*SQRT(S) + C*S**2.0d0
 
@@ -65,20 +65,20 @@ FUNCTION rho(salt, temp, pbar)
 ! The secant bulk modulus is the average change in pressure
 ! divided by the total change in volume per unit of initial volume.
   Ksbmw = 19652.21d0 + 148.4206d0*X - 2.327105d0*X*X &
-       + 1.360477e-2_r8*X**3 - 5.155288e-5_r8*X**4
+       + 1.360477e-2*X**3 - 5.155288e-5*X**4
 
 ! Secant bulk modulus of seawater at 1 atm
-  Ksbm0 = Ksbmw + S*( 54.6746d0 - 0.603459d0*X + 1.09987e-2_r8*X**2 &
-       - 6.1670e-5_r8*X**3) &
-       + S*SQRT(S)*( 7.944e-2_r8 + 1.6483e-2_r8*X - 5.3009e-4_r8*X**2)
+  Ksbm0 = Ksbmw + S*( 54.6746d0 - 0.603459d0*X + 1.09987e-2*X**2 &
+       - 6.1670e-5*X**3) &
+       + S*SQRT(S)*( 7.944e-2 + 1.6483e-2*X - 5.3009e-4*X**2)
 
 ! Secant bulk modulus of seawater at S,T,P
   Ksbm = Ksbm0 &
-       + P*(3.239908d0 + 1.43713e-3_r8*X + 1.16092e-4_r8*X**2 - 5.77905e-7_r8*X**3) &
-       + P*S*(2.2838e-3_r8 - 1.0981e-5_r8*X - 1.6078e-6_r8*X**2) &
-       + P*S*SQRT(S)*1.91075e-4_r8 &
-       + P*P*(8.50935e-5_r8 - 6.12293e-6_r8*X + 5.2787e-8_r8*X**2) &
-       + P*P*S*(-9.9348e-7_r8 + 2.0816e-8_r8*X + 9.1697e-10_r8*X**2)
+       + P*(3.239908d0 + 1.43713e-3*X + 1.16092e-4*X**2 - 5.77905e-7*X**3) &
+       + P*S*(2.2838e-3 - 1.0981e-5*X - 1.6078e-6*X**2) &
+       + P*S*SQRT(S)*1.91075e-4 &
+       + P*P*(8.50935e-5 - 6.12293e-6*X + 5.2787e-8*X**2) &
+       + P*P*S*(-9.9348e-7 + 2.0816e-8*X + 9.1697e-10*X**2)
 
 ! Density of seawater at S,T,P
   drho = rho0/(1.0d0 - P/Ksbm)
@@ -137,15 +137,15 @@ FUNCTION rho_DNAD(salt, temp, pbar)
   X = temp
 
 ! Density of pure water
-  rhow = 999.842594d0 + 6.793952e-2_r8*X          &
-       -9.095290e-3_r8*X*X + 1.001685e-4_r8*X**3  &
-       -1.120083e-6_r8*X**4 + 6.536332e-9_r8*X**5
+  rhow = 999.842594d0 + 6.793952e-2*X          &
+       -9.095290e-3*X*X + 1.001685e-4*X**3  &
+       -1.120083e-6*X**4 + 6.536332e-9*X**5
 
 ! Density of seawater at 1 atm, P=0
-  A = 8.24493e-1_r8 - 4.0899e-3_r8*X                         &
-       + 7.6438e-5_r8*X*X - 8.2467e-7_r8*X**3 + 5.3875e-9_r8*X**4
-  B = -5.72466e-3_r8 + 1.0227e-4_r8*X - 1.6546e-6_r8*X*X
-  C = 4.8314e-4_r8
+  A = 8.24493e-1 - 4.0899e-3*X                         &
+       + 7.6438e-5*X*X - 8.2467e-7*X**3 + 5.3875e-9*X**4
+  B = -5.72466e-3 + 1.0227e-4*X - 1.6546e-6*X*X
+  C = 4.8314e-4
 
   rho0 = rhow + A*S + B*S*SQRT(S) + C*S**2.0d0
 
@@ -153,20 +153,20 @@ FUNCTION rho_DNAD(salt, temp, pbar)
 ! The secant bulk modulus is the average change in pressure
 ! divided by the total change in volume per unit of initial volume.
   Ksbmw = 19652.21d0 + 148.4206d0*X - 2.327105d0*X*X &
-       + 1.360477e-2_r8*X**3 - 5.155288e-5_r8*X**4
+       + 1.360477e-2*X**3 - 5.155288e-5*X**4
 
 ! Secant bulk modulus of seawater at 1 atm
-  Ksbm0 = Ksbmw + S*( 54.6746d0 - 0.603459d0*X + 1.09987e-2_r8*X**2 &
-       - 6.1670e-5_r8*X**3) &
-       + S*SQRT(S)*( 7.944e-2_r8 + 1.6483e-2_r8*X - 5.3009e-4_r8*X**2)
+  Ksbm0 = Ksbmw + S*( 54.6746d0 - 0.603459d0*X + 1.09987e-2*X**2 &
+       - 6.1670e-5*X**3) &
+       + S*SQRT(S)*( 7.944e-2 + 1.6483e-2*X - 5.3009e-4*X**2)
 
 ! Secant bulk modulus of seawater at S,T,P
   Ksbm = Ksbm0 &
-       + P*(3.239908d0 + 1.43713e-3_r8*X + 1.16092e-4_r8*X**2 - 5.77905e-7_r8*X**3) &
-       + P*S*(2.2838e-3_r8 - 1.0981e-5_r8*X - 1.6078e-6_r8*X**2) &
-       + P*S*SQRT(S)*1.91075e-4_r8 &
-       + P*P*(8.50935e-5_r8 - 6.12293e-6_r8*X + 5.2787e-8_r8*X**2) &
-       + P*P*S*(-9.9348e-7_r8 + 2.0816e-8_r8*X + 9.1697e-10_r8*X**2)
+       + P*(3.239908d0 + 1.43713e-3*X + 1.16092e-4*X**2 - 5.77905e-7*X**3) &
+       + P*S*(2.2838e-3 - 1.0981e-5*X - 1.6078e-6*X**2) &
+       + P*S*SQRT(S)*1.91075e-4 &
+       + P*P*(8.50935e-5 - 6.12293e-6*X + 5.2787e-8*X**2) &
+       + P*P*S*(-9.9348e-7 + 2.0816e-8*X + 9.1697e-10*X**2)
 
 ! Density of seawater at S,T,P
   rho_DNAD = rho0/(1.0d0 - P/Ksbm)

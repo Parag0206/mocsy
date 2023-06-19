@@ -22,7 +22,7 @@ real (r8) :: gsw_t_from_ct
 
 real (r8) :: pt0
 
-real (r8), parameter :: p0 = 0.0_r8
+real (r8), parameter :: p0 = 0.0
 
 pt0 = gsw_pt_from_ct(sa,ct)
 gsw_t_from_ct = gsw_pt_from_t(sa,pt0,p0,p)

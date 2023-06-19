@@ -21,23 +21,23 @@ integer :: k, nmean
 real (r8) :: data_mean
 
 nmean = 0
-data_mean = 0.0_r8
+data_mean = 0.0
 
 do k = 1,4
-   if (abs(data_in(k)).le.100.0_r8) then
+   if (abs(data_in(k)).le.100.0) then
       nmean = nmean + 1
       data_mean = data_mean + data_in(k)
    end if
 end do
 
 if(nmean.eq.0)then
-   data_mean = 0.0_r8    !error return
+   data_mean = 0.0    !error return
 else
    data_mean = data_mean/nmean
 endif
 
 do k = 1,4
-   if(abs(data_in(k)).ge.100.0_r8) then
+   if(abs(data_in(k)).ge.100.0) then
       data_out(k) = data_mean
    else
       data_out(k) = data_in(k)

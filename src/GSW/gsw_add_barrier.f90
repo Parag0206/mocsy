@@ -78,23 +78,23 @@ else
 end if
 
 nmean = 0 
-data_mean = 0.0_r8
+data_mean = 0.0
 
 do kk = 1,4
-   if ((abs(input_data(kk)).le.100_r8).and.above_line0.eq.above_line(kk)) then
+   if ((abs(input_data(kk)).le.100).and.above_line0.eq.above_line(kk)) then
       nmean = nmean + 1
       data_mean = data_mean + input_data(kk)
    end if
 end do
 
 if (nmean .eq. 0)then
-   data_mean = 0.0_r8    !errorreturn
+   data_mean = 0.0    !errorreturn
 else
    data_mean = data_mean/nmean
 endif
 
 do kk = 1,4
-   if ((abs(input_data(kk)).ge.1e10_r8).or.above_line0.ne.above_line(kk)) then
+   if ((abs(input_data(kk)).ge.1e10).or.above_line0.ne.above_line(kk)) then
       output_data(kk) = data_mean
    else
       output_data(kk) = input_data(kk)

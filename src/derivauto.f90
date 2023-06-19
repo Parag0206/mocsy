@@ -430,14 +430,14 @@ SUBROUTINE derivauto(ph_deriv, pco2_deriv, fco2_deriv, co2_deriv, hco3_deriv, co
 
      ELSE
 
-        ph_deriv(:,i)     = 1.e20_r8
-        pCO2_deriv(:,i)   = 1.e20_r8
-        fCO2_deriv(:,i)   = 1.e20_r8
-        co2_deriv(:,i)    = 1.e20_r8
-        hco3_deriv(:,i)   = 1.e20_r8
-        co3_deriv(:,i)    = 1.e20_r8
-        OmegaA_deriv(:,i) = 1.e20_r8
-        OmegaC_deriv(:,i) = 1.e20_r8
+        ph_deriv(:,i)     = 1.e20
+        pCO2_deriv(:,i)   = 1.e20
+        fCO2_deriv(:,i)   = 1.e20
+        co2_deriv(:,i)    = 1.e20
+        hco3_deriv(:,i)   = 1.e20
+        co3_deriv(:,i)    = 1.e20
+        OmegaA_deriv(:,i) = 1.e20
+        OmegaC_deriv(:,i) = 1.e20
 
      ENDIF
 

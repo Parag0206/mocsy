@@ -178,8 +178,8 @@ SUBROUTINE errors  (eH, epCO2, efCO2, eCO2, eHCO3, eCO3, eOmegaA, eOmegaC,    &
 ! Local variables
 
   ! Default value for errors on pK
-  REAL(kind=8), DIMENSION(7) :: epK_local = (/0.002_r8, 0.0075_r8, 0.015_r8, 0.01_r8, 0.01_r8, 0.02_r8, 0.02_r8/)
-  REAL(kind=8), DIMENSION(7) :: epKstd = (/0.002_r8, 0.0075_r8, 0.015_r8, 0.01_r8, 0.01_r8, 0.02_r8, 0.02_r8/)
+  REAL(kind=8), DIMENSION(7) :: epK_local = (/0.002, 0.0075, 0.015, 0.01, 0.01, 0.02, 0.02/)
+  REAL(kind=8), DIMENSION(7) :: epKstd = (/0.002, 0.0075, 0.015, 0.01, 0.01, 0.02, 0.02/)
   REAL(kind=8), DIMENSION(7) :: epKzero
 ! REAL(kind=8), DIMENSION(7) :: epKstd
 ! Extend epK_local by 1 to later include error for Bt (simplifies coding)
@@ -188,11 +188,11 @@ SUBROUTINE errors  (eH, epCO2, efCO2, eCO2, eHCO3, eCO3, eOmegaA, eOmegaC,    &
 ! CHARACTER*3, DIMENSION(7) :: Kid = (/'k0 ','k1 ','k2 ','kb ','kw ','ka ','kc '/)
 
   ! Default value for error on Total Boron (ebt)
-  REAL(kind=8) :: ebt_local = 0.02_r8
+  REAL(kind=8) :: ebt_local = 0.02
 ! REAL(kind=8) :: ebt_local 
 
   ! Default value for correlation between ALK & DIC
-  REAL(kind=8) :: r_local = 0.0_r8
+  REAL(kind=8) :: r_local = 0.0
 
   ! derivative of H on the <b>total scale</b>
   REAL(kind=8), DIMENSION(N) :: dh_dx
@@ -294,7 +294,7 @@ SUBROUTINE errors  (eH, epCO2, efCO2, eCO2, eHCO3, eCO3, eOmegaA, eOmegaC,    &
   IF (PRESENT(r)) THEN
      r_local = r
   ELSE
-     r_local = 0.0_r8
+     r_local = 0.0
   ENDIF
   IF (PRESENT(epK)) THEN
      epK_local(:) = epK(:)
@@ -310,12 +310,12 @@ SUBROUTINE errors  (eH, epCO2, efCO2, eCO2, eHCO3, eCO3, eOmegaA, eOmegaC,    &
          ENDIF
      ENDIF
   ELSE
-     epK_local = (/0.002_r8, 0.0075_r8, 0.015_r8, 0.01_r8, 0.01_r8, 0.02_r8, 0.02_r8/)
+     epK_local = (/0.002, 0.0075, 0.015, 0.01, 0.01, 0.02, 0.02/)
   ENDIF
   IF (PRESENT(ebt)) THEN
      ebt_local = ebt
   ELSE
-     ebt_local = 0.02_r8
+     ebt_local = 0.02
   ENDIF
   
   ! initialise total square error
@@ -338,7 +338,7 @@ SUBROUTINE errors  (eH, epCO2, efCO2, eCO2, eHCO3, eCO3, eOmegaA, eOmegaC,    &
             optCON, optT, optP, opB, opK1K2, opKf, opGAS                    )
 
   ! Covariance (only when R is not zero)
-  IF (r_local .NE. 0.0_r8) THEN
+  IF (r_local .NE. 0.0) THEN
      r_dh_dx(:)      = dh_dx(:)      * ealk(:)
      r_dpco2_dx(:)   = dpco2_dx(:)   * ealk(:)
      r_dfco2_dx(:)   = dfco2_dx(:)   * ealk(:)
@@ -387,15 +387,15 @@ SUBROUTINE errors  (eH, epCO2, efCO2, eCO2, eHCO3, eCO3, eOmegaA, eOmegaC,    &
             optCON, optT, optP, opB, opK1K2, opKf, opGAS                    )
   
   ! Covariance (only when R is not zero) = 2*r*(dvar/dAt)*(dvar/dCt)*sigma1*sigma2
-  IF (r_local .NE. 0.0_r8) THEN
-     eH(:)      = eH(:)      + 2.0_r8 * r_local * r_dh_dx(:)      * dh_dx(:)      * edic(:)
-     epco2(:)   = epco2(:)   + 2.0_r8 * r_local * r_dpco2_dx(:)   * dpco2_dx(:)   * edic(:)
-     efco2(:)   = efco2(:)   + 2.0_r8 * r_local * r_dfco2_dx(:)   * dfco2_dx(:)   * edic(:)
-     eco2(:)    = eco2(:)    + 2.0_r8 * r_local * r_dco2_dx(:)    * dco2_dx(:)    * edic(:)
-     ehco3(:)   = ehco3(:)   + 2.0_r8 * r_local * r_dhco3_dx(:)   * dhco3_dx(:)   * edic(:)
-     eco3(:)    = eco3(:)    + 2.0_r8 * r_local * r_dco3_dx(:)    * dco3_dx(:)    * edic(:)
-     eOmegaA(:) = eOmegaA(:) + 2.0_r8 * r_local * r_dOmegaA_dx(:) * dOmegaA_dx(:) * edic(:)
-     eOmegaC(:) = eOmegaC(:) + 2.0_r8 * r_local * r_dOmegaC_dx(:) * dOmegaC_dx(:) * edic(:)
+  IF (r_local .NE. 0.0) THEN
+     eH(:)      = eH(:)      + 2.0 * r_local * r_dh_dx(:)      * dh_dx(:)      * edic(:)
+     epco2(:)   = epco2(:)   + 2.0 * r_local * r_dpco2_dx(:)   * dpco2_dx(:)   * edic(:)
+     efco2(:)   = efco2(:)   + 2.0 * r_local * r_dfco2_dx(:)   * dfco2_dx(:)   * edic(:)
+     eco2(:)    = eco2(:)    + 2.0 * r_local * r_dco2_dx(:)    * dco2_dx(:)    * edic(:)
+     ehco3(:)   = ehco3(:)   + 2.0 * r_local * r_dhco3_dx(:)   * dhco3_dx(:)   * edic(:)
+     eco3(:)    = eco3(:)    + 2.0 * r_local * r_dco3_dx(:)    * dco3_dx(:)    * edic(:)
+     eOmegaA(:) = eOmegaA(:) + 2.0 * r_local * r_dOmegaA_dx(:) * dOmegaA_dx(:) * edic(:)
+     eOmegaC(:) = eOmegaC(:) + 2.0 * r_local * r_dOmegaC_dx(:) * dOmegaC_dx(:) * edic(:)
   ENDIF
 
   ! multiply derivatives by error
