@@ -10,10 +10,10 @@ PROGRAM test_phizero
    INTEGER, PARAMETER :: n = 1
    
 !  Output variables:
-   REAL(kind=r8), DIMENSION(1) :: phi0_cfc11, phi0_cfc12, phi0_sf6, phi0_co2, phi0_n2o
+   REAL(kind=8), DIMENSION(1) :: phi0_cfc11, phi0_cfc12, phi0_sf6, phi0_co2, phi0_n2o
    
 !  Input variables
-   REAL(kind=r8), DIMENSION(1) :: temp, sal
+   REAL(kind=8), DIMENSION(1) :: temp, sal
    
 !  Input at standard T and S
 !  temp(1)   = 25.0    

@@ -13,16 +13,16 @@ FUNCTION sw_adtg  (s,t,p)
   USE msingledouble
   IMPLICIT NONE
   !> salinity [psu (PSU-78)]
-  REAL(kind=r8) :: s
+  REAL(kind=8) :: s
   !> temperature [degree C (IPTS-68)]
-  REAL(kind=r8) :: t
+  REAL(kind=8) :: t
   !> pressure [db]
-  REAL(kind=r8) :: p
+  REAL(kind=8) :: p
 
-  REAL(kind=r8) :: a0,a1,a2,a3,b0,b1,c0,c1,c2,c3,d0,d1,e0,e1,e2
-  REAL(kind=r8) :: sref
+  REAL(kind=8) :: a0,a1,a2,a3,b0,b1,c0,c1,c2,c3,d0,d1,e0,e1,e2
+  REAL(kind=8) :: sref
 
-  REAL(kind=r8) :: sw_adtg
+  REAL(kind=8) :: sw_adtg
 
   sref = 35.d0
   a0 =  3.5803d-5
@@ -71,8 +71,8 @@ FUNCTION sw_adtg_DNAD  (s,t,p)
   !> pressure [db]
   TYPE(DUAL_NUM) :: p
 
-  REAL(kind=r8) :: a0,a1,a2,a3,b0,b1,c0,c1,c2,c3,d0,d1,e0,e1,e2
-  REAL(kind=r8) :: sref
+  REAL(kind=8) :: a0,a1,a2,a3,b0,b1,c0,c1,c2,c3,d0,d1,e0,e1,e2
+  REAL(kind=8) :: sref
 
   TYPE(DUAL_NUM) :: sw_adtg_DNAD
 

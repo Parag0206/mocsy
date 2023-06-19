@@ -21,24 +21,24 @@ SUBROUTINE tpot(salt, tempis, press, pressref, N, tempot)
 
 ! INPUT variables
   !> salinity [psu]
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: salt
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: salt
   !> in situ temperature [C]
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: tempis
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: tempis
   !> pressure [db]
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: press
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: press
   !> pressure reference level [db]
-  REAL(kind=r8), INTENT(in) :: pressref
+  REAL(kind=8), INTENT(in) :: pressref
 
 ! OUTPUT variables:
   !> potential temperature [C] for pressref
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: tempot
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: tempot
 
-  REAL(kind=r8) :: dsalt, dtempis, dpress, dpressref
-  REAL(kind=r8) :: dtempot
+  REAL(kind=8) :: dsalt, dtempis, dpress, dpressref
+  REAL(kind=8) :: dtempot
 
   INTEGER :: i
 
-! REAL(kind=r8) :: sw_ptmp
+! REAL(kind=8) :: sw_ptmp
 ! EXTERNAL sw_ptmp
 
   DO i = 1,N

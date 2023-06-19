@@ -67,19 +67,19 @@ IMPLICIT NONE
 !f2py intent(hide) n
   INTEGER, INTENT(in) :: N
   !>  SA: Absolute Salinity (g/kg)
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: SA
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: SA
   !>  TA: Total Alkalinity, in mol/kg 
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: TA
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: TA
   !> DIC: Dissolved Inorganic Carbone concentration in mol/kg
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: DIC
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: DIC
   !> NO3: Total Nitrate concentration in mol/kg
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: NO3
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: NO3
   !> SIOH4: Total Silicate concentration in mol/kg
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: SIOH4
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: SIOH4
 
 ! Output variables:
   !>  SP: Practical Salinity on the practical salinity scale
-  REAL(kind=r8), INTENT(out),    DIMENSION(N) :: SP
+  REAL(kind=8), INTENT(out),    DIMENSION(N) :: SP
 
   
   ! Reverse conversion (SA from SP) follows this equation :
@@ -167,27 +167,27 @@ IMPLICIT NONE
 !f2py intent(hide) n
   INTEGER, INTENT(in) :: N
   !> SA: Absolute Salinity (g/kg)
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: SA
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: SA
   !> P: Sea water pressure in dbar (optional, default = 0)
 !!!f2py real(8) intent(in), optional, dimension(n) :: p = 0.0
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: P
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: P
 !f2py optional :: p = 0.0
 !
   !> lon: Longitude, optional, in decimal degrees [ 0 ... +360 ] or [ -180 ... +180 ]
 !!!f2py real(8) intent(in), optional, dimension(n) :: lon = -25.0
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
 !f2py optional :: lon = -25.0
   !> lat: Latitude, optional, in decimal degrees [-90 ... 90]
 !!!f2py real(8) intent(in), optional, dimension(n) :: lat = 0.0
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lat
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lat
 !f2py optional :: lat = 0.0
 
 ! Output variables:
   !> SP: Practical Salinity on the practical salinity scale
-  REAL(kind=r8), INTENT(out),    DIMENSION(N) :: SP
+  REAL(kind=8), INTENT(out),    DIMENSION(N) :: SP
 
   ! Default latitude and longitude
-  REAL(kind=r8) :: def_lat, def_lon
+  REAL(kind=8) :: def_lat, def_lon
   INTEGER :: i
 
   IF (PRESENT(lat) .AND. PRESENT(lon)) THEN
@@ -277,22 +277,22 @@ IMPLICIT NONE
 !f2py intent(hide) n
   INTEGER, INTENT(in) :: N
   !>  SP: Practical Salinity on the practical salinity scale
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: SP
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: SP
   !>  TA: Total Alkalinity, in mol/kg 
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: TA
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: TA
   !> DIC: Dissolved Inorganic Carbone concentration in mol/kg
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: DIC
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: DIC
   !> NO3: Total Nitrate concentration in mol/kg
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: NO3
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: NO3
   !> SIOH4: Total Silicate concentration in mol/kg
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: SIOH4
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: SIOH4
 
 ! Output variables:
   !>  SA: Absolute Salinity (g/kg)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: SA
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: SA
 
-  REAL(kind=r8) :: DIC_stdsw, TA_stdsw
-  REAL(kind=r8) :: SR, sal_anomaly
+  REAL(kind=8) :: DIC_stdsw, TA_stdsw
+  REAL(kind=8) :: SR, sal_anomaly
   INTEGER :: i
 
   ! This function is made of two parts :
@@ -371,27 +371,27 @@ IMPLICIT NONE
 !f2py intent(hide) n
   INTEGER, INTENT(in) :: N
   !> SP: Practical Salinity on the practical salinity scale
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: SP
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: SP
   !> P: Sea water pressure in dbar (optional, default = 0)
 !!!f2py real(8) intent(in), optional, dimension(n) :: p = 0.0
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: P
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: P
 !f2py optional :: p = 0.0
   !> lon: Longitude, optional, in decimal degrees [ 0 ... +360 ] or [ -180 ... +180 ]
 !!!f2py real(8) intent(in), optional, dimension(n) :: lon = -25.0
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
 !f2py optional :: lon = -25.0
   !> lat: Latitude, optional, in decimal degrees [-90 ... 90]
 !!!f2py real(8) intent(in), optional, dimension(n) :: lat = 0.0
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lat
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lat
 !f2py optional :: lat = -25.0
 
 ! Output variables:
   !>  SA: Absolute Salinity (g/kg)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: SA
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: SA
 
 
   ! Default latitude and longitude
-  REAL(kind=r8) :: def_lat, def_lon
+  REAL(kind=8) :: def_lat, def_lon
   INTEGER :: i
 
   IF (PRESENT(lat) .AND. PRESENT(lon)) THEN
@@ -487,25 +487,25 @@ IMPLICIT NONE
 !f2py intent(hide) n
   INTEGER, INTENT(in) :: N
   !> CvT: Conservative Temperature (deg C)
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: CvT
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: CvT
   !> SA: Absolute Salinity (g/kg)
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: SA
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: SA
   !>  P: Sea water pressure in dbar
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: P
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: P
   !> TA: Total Alkalinity, in mol/kg 
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: TA
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: TA
   !> DIC: Dissolved Inorganic Carbone concentration in mol/kg
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: DIC
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: DIC
   !> NO3: Total Nitrate concentration in mol/kg
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: NO3
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: NO3
   !> SIOH4: Total Silicate concentration in mol/kg
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: SIOH4
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: SIOH4
 
 ! Output variables:
   !> SP: Practical Salinity on the practical salinity scale
-  REAL(kind=r8), INTENT(out),    DIMENSION(N) :: SP
+  REAL(kind=8), INTENT(out),    DIMENSION(N) :: SP
   !>  T: in-situ temperature in deg. C
-  REAL(kind=r8), INTENT(out),    DIMENSION(N) :: T
+  REAL(kind=8), INTENT(out),    DIMENSION(N) :: T
 
   INTEGER :: i
 
@@ -578,27 +578,27 @@ IMPLICIT NONE
 !f2py intent(hide) n
   INTEGER, INTENT(in) :: N
   !> CvT: Conservative Temperature (deg C)
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: CvT
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: CvT
   !> SA: Absolute Salinity (g/kg)
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: SA
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: SA
   !> P: Sea water pressure in dbar (optional, default = 0)
 !!!f2py real(8) intent(in), optional, dimension(n) :: p = 0.0
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: P
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: P
 !f2py optional :: p = 0.0
   !> lon: Longitude, optional, in decimal degrees [ 0 ... +360 ] or [ -180 ... +180 ]
 !!!f2py real(8) intent(in), optional, dimension(n) :: lon = -25.0
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
 !f2py optional :: lon = -25.0
   !> lat: Latitude, optional, in decimal degrees [-90 ... 90]
 !!!f2py real(8) intent(in), optional, dimension(n) :: lat = 0.0
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lat
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lat
 !f2py optional :: lat = 0.0
 
 ! Output variables:
   !> SP: Practical Salinity on the practical salinity scale
-  REAL(kind=r8), INTENT(out),    DIMENSION(N) :: SP
+  REAL(kind=8), INTENT(out),    DIMENSION(N) :: SP
   !>  T: in-situ temperature in deg. C
-  REAL(kind=r8), INTENT(out),    DIMENSION(N) :: T
+  REAL(kind=8), INTENT(out),    DIMENSION(N) :: T
 
   INTEGER :: i
   
@@ -674,27 +674,27 @@ IMPLICIT NONE
 !f2py intent(hide) n
   INTEGER, INTENT(in) :: N
   !> SP: Practical Salinity on the practical salinity scale
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: SP
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: SP
   !> T: in-situ temperature in deg. C
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: T
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: T
   !> P: Sea water pressure in dbar (optional, default = 0)
 !!!f2py real(8) intent(in), optional, dimension(n) :: p = 0.0
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: P
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: P
 !f2py optional :: p = 0.0
   !> lon: Longitude, optional, in decimal degrees [ 0 ... +360 ] or [ -180 ... +180 ]
 !!!f2py real(8) intent(in), optional, dimension(n) :: lon = -25.0
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
 !f2py optional :: lon = -25.0
   !> lat: Latitude, optional, in decimal degrees [-90 ... 90]
 !!!f2py real(8) intent(in), optional, dimension(n) :: lat = 0.0
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lat
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lat
 !f2py optional :: lat = 0.0
 
 ! Output variables:
   !> CvT: Conservative Temperature (deg C)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: CvT
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: CvT
   !> SA: Absolute Salinity (g/kg)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: SA
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: SA
 
   INTEGER :: i
 
@@ -782,25 +782,25 @@ IMPLICIT NONE
 !f2py intent(hide) n
   INTEGER, INTENT(in) :: N
   !>  SP: Practical Salinity on the practical salinity scale
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: SP
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: SP
   !>   T: in-situ temperature in deg. C
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: T
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: T
   !>   P: Sea water pressure in dbar
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: P
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: P
   !>  TA: Total Alkalinity, in mol/kg 
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: TA
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: TA
   !> DIC: Dissolved Inorganic Carbone concentration in mol/kg
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: DIC
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: DIC
   !> NO3: Total Nitrate concentration in mol/kg
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: NO3
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: NO3
   !> SIOH4: Total Silicate concentration in mol/kg
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: SIOH4
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: SIOH4
 
 ! Output variables:
   !> CvT: Conservative Temperature (deg C)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: CvT
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: CvT
   !> SA: Absolute Salinity (g/kg)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: SA
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: SA
 
   INTEGER :: i
 

@@ -10,12 +10,12 @@ PROGRAM test_mocsy
 
 !  For vars routine (called below)
 !  "vars" Output variables:
-   REAL(kind=r8), DIMENSION(100) :: ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p, tempis
+   REAL(kind=8), DIMENSION(100) :: ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p, tempis
 !  "vars" Input variables
    INTEGER :: N
-   REAL(kind=r8), DIMENSION(100) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat
-   REAL(kind=r8), DIMENSION(4,100) :: ph_deriv, pco2_deriv, OmegaA_deriv
-   REAL(kind=r8) ::  gamma_DIC, gamma_Alk, beta_DIC, beta_Alk, omega_DIC, omega_Alk
+   REAL(kind=8), DIMENSION(100) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat
+   REAL(kind=8), DIMENSION(4,100) :: ph_deriv, pco2_deriv, OmegaA_deriv
+   REAL(kind=8) ::  gamma_DIC, gamma_Alk, beta_DIC, beta_Alk, omega_DIC, omega_Alk
 !  "vars" Input options
    CHARACTER(10) :: optCON, optT, optP, optB, optKf, optK1K2
 

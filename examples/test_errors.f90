@@ -9,12 +9,12 @@ PROGRAM test_errors
 
 
 !  Output variables:
-   REAL(kind=r8), DIMENSION(6) :: eh, epco2, efco2, eco2, ehco3, eco3, eOmegaA, eOmegaC
+   REAL(kind=8), DIMENSION(6) :: eh, epco2, efco2, eco2, ehco3, eco3, eOmegaA, eOmegaC
 !  Input variables
-   REAL(kind=r8), DIMENSION(6) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat
-   REAL(kind=r8), DIMENSION(6) :: temp_e, sal_e, ALK_e, DIC_e, sil_e, phos_e
-   REAL(kind=r8), DIMENSION(7) :: epK, epKstd, epK0
-   REAL(kind=r8)               :: ebt
+   REAL(kind=8), DIMENSION(6) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat
+   REAL(kind=8), DIMENSION(6) :: temp_e, sal_e, ALK_e, DIC_e, sil_e, phos_e
+   REAL(kind=8), DIMENSION(7) :: epK, epKstd, epK0
+   REAL(kind=8)               :: ebt
    
 !  Input options
    CHARACTER(10) :: optCON, optT, optP, optB, optKf, optK1K2

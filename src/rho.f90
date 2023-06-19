@@ -13,21 +13,21 @@ FUNCTION rho(salt, temp, pbar)
   IMPLICIT NONE
 
   !> salinity [psu]
-  REAL(kind=r8) :: salt
+  REAL(kind=8) :: salt
   !> in situ temperature (C)
-  REAL(kind=r8) :: temp
+  REAL(kind=8) :: temp
   !> pressure (bar) [Note units: this is NOT in decibars]
-  REAL(kind=r8) :: pbar
+  REAL(kind=8) :: pbar
 
-  REAL(kind=r8) :: s, t, p
-! REAL(kind=r8) :: t68
-  REAL(kind=r8) :: X
-  REAL(kind=r8) :: rhow, rho0
-  REAL(kind=r8) :: a, b, c
-  REAL(kind=r8) :: Ksbmw, Ksbm0, Ksbm
-  REAL(kind=r8) :: drho
+  REAL(kind=8) :: s, t, p
+! REAL(kind=8) :: t68
+  REAL(kind=8) :: X
+  REAL(kind=8) :: rhow, rho0
+  REAL(kind=8) :: a, b, c
+  REAL(kind=8) :: Ksbmw, Ksbm0, Ksbm
+  REAL(kind=8) :: drho
 
-  REAL(kind=r8) :: rho
+  REAL(kind=8) :: rho
 
   !     Input arguments:
   !     -------------------------------------
@@ -110,7 +110,7 @@ FUNCTION rho_DNAD(salt, temp, pbar)
   TYPE (DUAL_NUM) :: pbar
 
   TYPE (DUAL_NUM) :: s, p
-! REAL(kind=r8) :: t68
+! REAL(kind=8) :: t68
   TYPE (DUAL_NUM) :: X
   TYPE (DUAL_NUM) :: rhow, rho0
   TYPE (DUAL_NUM) :: a, b, c

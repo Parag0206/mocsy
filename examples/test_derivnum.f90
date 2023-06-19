@@ -10,11 +10,11 @@ PROGRAM test_derivnum
 
 
 !  Output variables:
-   REAL(kind=r8), DIMENSION(1) :: h, ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p, tempis
+   REAL(kind=8), DIMENSION(1) :: h, ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p, tempis
 !  derivative of "vars" Output variables:
-   REAL(kind=r8), DIMENSION(1) :: dh_dx, dpco2_dx, dfco2_dx, dco2_dx, dhco3_dx, dco3_dx, dOmegaA_dx, dOmegaC_dx
+   REAL(kind=8), DIMENSION(1) :: dh_dx, dpco2_dx, dfco2_dx, dco2_dx, dhco3_dx, dco3_dx, dOmegaA_dx, dOmegaC_dx
 !  Input variables
-   REAL(kind=r8), DIMENSION(1) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat
+   REAL(kind=8), DIMENSION(1) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat
 !  Input options
    CHARACTER(10) :: optCON, optT, optP, optB, optKf, optK1K2
 

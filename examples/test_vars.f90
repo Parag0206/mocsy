@@ -9,17 +9,17 @@ PROGRAM test_vars
 
 !  For vars routine (called below)
 !  "vars" Output variables:
-   REAL(kind=r8), DIMENSION(1) :: ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p, tempis
+   REAL(kind=8), DIMENSION(1) :: ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p, tempis
 !  "vars" Input variables
    INTEGER :: N
-   REAL(kind=r8), DIMENSION(1) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat, lon
+   REAL(kind=8), DIMENSION(1) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat, lon
 !  "vars" Input options
    CHARACTER(10) :: optCON, optT, optP, optB, optKf, optK1K2, optS
 
 
 !  Local variables:
    INTEGER :: i
-   REAL(kind=r8) :: H   ! concentration of [H+]
+   REAL(kind=8) :: H   ! concentration of [H+]
 
 
 !> Typical options for observations

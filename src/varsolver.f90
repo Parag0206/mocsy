@@ -57,56 +57,56 @@ SUBROUTINE varsolver(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,            
 
 ! Input variables
   !> <b>in situ temperature</b> [degrees C]
-  REAL(kind=r8), INTENT(in) :: temp
+  REAL(kind=8), INTENT(in) :: temp
   !> <b>salinity</b> [on the practical salinity scale, dimensionless]
-  REAL(kind=r8), INTENT(in) :: salt
+  REAL(kind=8), INTENT(in) :: salt
   !> total alkalinity in <b>[eq/m^3]</b> OR in <b>[eq/kg]</b>, depending on optCON in calling routine
-  REAL(kind=r8), INTENT(in) :: ta
+  REAL(kind=8), INTENT(in) :: ta
   !> dissolved inorganic carbon in <b>[mol/m^3]</b> OR in <b>[mol/kg]</b>, depending on optCON in calling routine
-  REAL(kind=r8), INTENT(in) :: tc
+  REAL(kind=8), INTENT(in) :: tc
   !> phosphate concentration in <b>[mol/m^3]</b> OR in <b>[mol/kg]</b>, depending on optCON in calling routine
-  REAL(kind=r8), INTENT(in) :: pt
+  REAL(kind=8), INTENT(in) :: pt
   !> total dissolved inorganic silicon concentration in <b>[mol/m^3]</b> OR in <b>[mol/kg]</b>, depending on optCON in calling routine
-  REAL(kind=r8), INTENT(in) :: sit
+  REAL(kind=8), INTENT(in) :: sit
   !> total boron from either Uppstrom (1974) or Lee et al. (2010), depending on optB in calling routine
-  REAL(kind=r8), INTENT(in) :: Bt
+  REAL(kind=8), INTENT(in) :: Bt
   !> total sulfate (Morris & Riley, 1966)
-  REAL(kind=r8), INTENT(in) :: St
+  REAL(kind=8), INTENT(in) :: St
   !> total fluoride  (Riley, 1965)
-  REAL(kind=r8), INTENT(in) :: Ft
+  REAL(kind=8), INTENT(in) :: Ft
   !> solubility of CO2 in seawater (Weiss, 1974), also known as K0
-  REAL(kind=r8), INTENT(in) :: K0
+  REAL(kind=8), INTENT(in) :: K0
   !> K1 for the dissociation of carbonic acid from Lueker et al. (2000) or Millero (2010), depending on optK1K2
-  REAL(kind=r8), INTENT(in) :: K1
+  REAL(kind=8), INTENT(in) :: K1
   !> K2 for the dissociation of carbonic acid from Lueker et al. (2000) or Millero (2010), depending on optK1K2
-  REAL(kind=r8), INTENT(in) :: K2
+  REAL(kind=8), INTENT(in) :: K2
   !> equilibrium constant for dissociation of boric acid 
-  REAL(kind=r8), INTENT(in) :: Kb
+  REAL(kind=8), INTENT(in) :: Kb
   !> equilibrium constant for the dissociation of water (Millero, 1995)
-  REAL(kind=r8), INTENT(in) :: Kw
+  REAL(kind=8), INTENT(in) :: Kw
   !> equilibrium constant for the dissociation of bisulfate (Dickson, 1990)
-  REAL(kind=r8), INTENT(in) :: Ks
+  REAL(kind=8), INTENT(in) :: Ks
   !> equilibrium constant for the dissociation of hydrogen fluoride 
   !! from Dickson and Riley (1979) or Perez and Fraga (1987), depending on optKf
-  REAL(kind=r8), INTENT(in) :: Kf
+  REAL(kind=8), INTENT(in) :: Kf
   !> solubility product for calcite (Mucci, 1983)
-  REAL(kind=r8), INTENT(in) :: Kspc
+  REAL(kind=8), INTENT(in) :: Kspc
   !> solubility product for aragonite (Mucci, 1983)
-  REAL(kind=r8), INTENT(in) :: Kspa
+  REAL(kind=8), INTENT(in) :: Kspa
   !> 1st dissociation constant for phosphoric acid (Millero, 1995)
-  REAL(kind=r8), INTENT(in) :: K1p
+  REAL(kind=8), INTENT(in) :: K1p
   !> 2nd dissociation constant for phosphoric acid (Millero, 1995)
-  REAL(kind=r8), INTENT(in) :: K2p
+  REAL(kind=8), INTENT(in) :: K2p
   !> 3rd dissociation constant for phosphoric acid (Millero, 1995)
-  REAL(kind=r8), INTENT(in) :: K3p
+  REAL(kind=8), INTENT(in) :: K3p
   !> equilibrium constant for the dissociation of silicic acid (Millero, 1995)
-  REAL(kind=r8), INTENT(in) :: Ksi
+  REAL(kind=8), INTENT(in) :: Ksi
   !> total atmospheric pressure <b>[atm]</b>
-  REAL(kind=r8), INTENT(in) :: Patm
+  REAL(kind=8), INTENT(in) :: Patm
   !> total hydrostatic pressure <b>[bar]</b>
-  REAL(kind=r8), INTENT(in) :: Phydro_bar
+  REAL(kind=8), INTENT(in) :: Phydro_bar
   !> density factor as computed incalling routine  (vars)
-  REAL(kind=r8), INTENT(in) :: rhodum
+  REAL(kind=8), INTENT(in) :: rhodum
   !> for K0,fugacity coefficient choose either \b 'Ppot' (no pressure correction) or \b 'Pinsitu' (with pressure correction) 
   !! 'Ppot'    - for 'potential' fCO2 and pCO2 (water parcel brought adiabatically to the surface)
   !! 'Pinsitu' - for 'in situ' values of fCO2 and pCO2, accounting for pressure on K0 and Cf
@@ -116,32 +116,32 @@ SUBROUTINE varsolver(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,            
 
 ! Output variables:
   !> pH on the <b>total scale</b>
-  REAL(kind=r8), INTENT(out) :: ph
+  REAL(kind=8), INTENT(out) :: ph
   !> CO2 partial pressure <b>[uatm]</b>
-  REAL(kind=r8), INTENT(out) :: pco2
+  REAL(kind=8), INTENT(out) :: pco2
   !> CO2 fugacity <b>[uatm]</b>
-  REAL(kind=r8), INTENT(out) :: fco2
+  REAL(kind=8), INTENT(out) :: fco2
   !> aqueous CO2* concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg</b>] depending on choice for optCON
-  REAL(kind=r8), INTENT(out) :: co2
+  REAL(kind=8), INTENT(out) :: co2
   !> bicarbonate ion (HCO3-) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=r8), INTENT(out) :: hco3
+  REAL(kind=8), INTENT(out) :: hco3
   !> carbonate ion (CO3--) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=r8), INTENT(out) :: co3
+  REAL(kind=8), INTENT(out) :: co3
   !> Omega for aragonite, i.e., the aragonite saturation state
-  REAL(kind=r8), INTENT(out) :: OmegaA
+  REAL(kind=8), INTENT(out) :: OmegaA
   !> Omega for calcite, i.e., the calcite saturation state
-  REAL(kind=r8), INTENT(out) :: OmegaC
+  REAL(kind=8), INTENT(out) :: OmegaC
 
 ! Local variables
-  REAL(kind=r8) :: Phydro_atm, Ptot
-  REAL(kind=r8) :: Rgas_atm, B, Del, xCO2approx, xc2, fugcoeff
-  REAL(kind=r8) :: tk, tk0
-  real(kind=r8) :: temp68, tempot, tempot68
-  REAL(kind=r8) :: Hinit, H
-  REAL(kind=r8) :: HSO4, HF, HSI, HPO4
-  REAL(kind=r8) :: ab, aw, ac
-  REAL(kind=r8) :: cu, cb, cc
-  REAL(kind=r8) :: Ca
+  REAL(kind=8) :: Phydro_atm, Ptot
+  REAL(kind=8) :: Rgas_atm, B, Del, xCO2approx, xc2, fugcoeff
+  REAL(kind=8) :: tk, tk0
+  real(kind=8) :: temp68, tempot, tempot68
+  REAL(kind=8) :: Hinit, H
+  REAL(kind=8) :: HSO4, HF, HSI, HPO4
+  REAL(kind=8) :: ab, aw, ac
+  REAL(kind=8) :: cu, cb, cc
+  REAL(kind=8) :: Ca
 ! Array to pass optional arguments
   CHARACTER(7) :: opGAS
 
@@ -387,7 +387,7 @@ SUBROUTINE varsolver_DNAD (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,      
   TYPE(DUAL_NUM) :: Phydro_atm, Ptot
   TYPE(DUAL_NUM) :: Rgas_atm, B, Del, xCO2approx, xc2, fugcoeff
   TYPE(DUAL_NUM) :: tk, tk0
-  real(kind=r8) :: temp68, tempot, tempot68
+  real(kind=8) :: temp68, tempot, tempot68
   TYPE(DUAL_NUM) :: Hinit, H
   TYPE(DUAL_NUM) :: HSO4, HF, HSI, HPO4
   TYPE(DUAL_NUM) :: ab, aw, ac

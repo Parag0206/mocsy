@@ -18,26 +18,26 @@ SUBROUTINE p2fCO2(pCO2, temp, Patm, p, N, fCO2)
 
 ! INPUT variables
   !> oceanic partial pressure of CO2 [uatm]
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: pCO2
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: pCO2
   !> in situ temperature [C]
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: temp
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: temp
   !> atmospheric pressure [atm]
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: Patm
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: Patm
   !> hydrostatic pressure [db]
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: p
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: p
 
 ! OUTPUT variables:
   !> fugacity of CO2 [uatm] 
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: fCO2
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: fCO2
 
 ! LOCAL variables:
-  REAL(kind=r8) :: dpCO2, dtemp, tk, dPatm, prb
-  REAL(kind=r8) :: Ptot, Rgas_atm, B, Del, xCO2approx, xc2, fugcoeff
-  REAL(kind=r8) :: dfCO2
+  REAL(kind=8) :: dpCO2, dtemp, tk, dPatm, prb
+  REAL(kind=8) :: Ptot, Rgas_atm, B, Del, xCO2approx, xc2, fugcoeff
+  REAL(kind=8) :: dfCO2
 
   INTEGER :: i
 
-! REAL(kind=r8) :: sw_ptmp
+! REAL(kind=8) :: sw_ptmp
 ! EXTERNAL sw_ptmp
 
   DO i = 1,N

@@ -83,47 +83,47 @@ SUBROUTINE errors  (eH, epCO2, efCO2, eCO2, eHCO3, eCO3, eOmegaA, eOmegaC,    &
   INTEGER, INTENT(in) :: N
   !> either <b>in situ temperature</b> (when optT='Tinsitu', typical data) 
   !! OR <b>potential temperature</b> (when optT='Tpot', typical models) <b>[degree C]</b>
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: temp
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: temp
   !> salinity <b>[psu]</b>
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sal
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: sal
   !> total alkalinity in <b>[eq/m^3]</b> (when optCON = 'mol/m3') OR in <b>[eq/kg]</b>  (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: alk
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: alk
   !> dissolved inorganic carbon in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: dic
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: dic
   !> SiO2 concentration in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sil
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: sil
   !> phosphate concentration in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: phos
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: phos
   !> atmospheric pressure <b>[atm]</b>
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: Patm
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: Patm
   !> depth in \b meters (when optP='m') or \b decibars (when optP='db')
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: depth
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: depth
   !> latitude <b>[degrees north]</b>
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: lat
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: lat
 
   !> standard error (or uncertainty) on Temperature
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: etemp
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: etemp
   !> standard error (or uncertainty) on Salinity
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: esal
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: esal
   !> standard error (or uncertainty) on alk
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: ealk
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: ealk
   !> standard error (or uncertainty) on DIC
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: edic
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: edic
   !> standard error (or uncertainty) on Silicate total concentrations
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: esil
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: esil
   !> standard error (or uncertainty) on Phosphate total concentrations
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: ephos
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: ephos
   !> standard error (or uncertainty) on all seven dissociation constants (a vector)
 !!!f2py real(8) intent(in), optional, dimension(7) :: epK=(0.002,0.0075,0.015,0.01,0.01,0.02,0.02)
-  REAL(kind=r8), INTENT(in), OPTIONAL, DIMENSION(7) :: epK
+  REAL(kind=8), INTENT(in), OPTIONAL, DIMENSION(7) :: epK
 !f2py real(8) intent(in), optional, dimension(7) :: epK=(0.002,0.0075,0.015,0.01,0.01,0.02,0.02)
 !!!f2py optional :: epK=(0.002,0.0075,0.015,0.01,0.01,0.02,0.02)
   !> correlation coefficient (-1 < r < 1) for correlation between ALK and DIC (zero by default)
 !f2py  real intent(in), optional :: r = 0.0
-  REAL(kind=r8), OPTIONAL, INTENT(in) :: r
+  REAL(kind=8), OPTIONAL, INTENT(in) :: r
   !> standard error (or uncertainty) on total boron (Bt) - a single number, not a vector like other errors
 !f2py  real intent(in), optional :: ebt=0.02
-  REAL(kind=r8), OPTIONAL, INTENT(in) :: ebt 
+  REAL(kind=8), OPTIONAL, INTENT(in) :: ebt 
 
   !> choose either \b 'mol/kg' (std DATA units) or \b 'mol/m3' (std MODEL units) to select 
   !! concentration units for input (for alk, dic, sil, phos) & output (co2, hco3, co3)
@@ -154,85 +154,85 @@ SUBROUTINE errors  (eH, epCO2, efCO2, eCO2, eHCO3, eCO3, eOmegaA, eOmegaC,    &
   CHARACTER(4), OPTIONAL, INTENT(in) :: optS
   !> longitude <b>[degrees east]</b>
 !!!f2py real(8) optional, intent(in), dimension(n) :: lon = -25.
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
 !f2py optional :: lon = -25.
 
 ! Output variables:
   !> total error to [H+] concentration  (mol/kg) on the <b>total scale</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: eH
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: eH
   !> total error to "standard" pCO2, CO2 partial pressure computed at in situ temperature and atmospheric pressure (µatm)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: epCO2
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: epCO2
   !> total error to "standard" fCO2, CO2 fugacity computed at in situ temperature and atmospheric pressure (µatm)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: efCO2
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: efCO2
   !> total error to CO2 concentration (mol/kg)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: eCO2
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: eCO2
   !> total error to HCO3 concentration (mol/kg)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: eHCO3
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: eHCO3
   !> total error to CO3 concentration (mol/kg)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: eCO3
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: eCO3
   !> total error of Omega aragonite (aragonite saturation state)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: eOmegaA
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: eOmegaA
   !> total error of Omega calcite   (calcite saturation state)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: eOmegaC
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: eOmegaC
 
 ! Local variables
 
   ! Default value for errors on pK
-  REAL(kind=r8), DIMENSION(7) :: epK_local = (/0.002_r8, 0.0075_r8, 0.015_r8, 0.01_r8, 0.01_r8, 0.02_r8, 0.02_r8/)
-  REAL(kind=r8), DIMENSION(7) :: epKstd = (/0.002_r8, 0.0075_r8, 0.015_r8, 0.01_r8, 0.01_r8, 0.02_r8, 0.02_r8/)
-  REAL(kind=r8), DIMENSION(7) :: epKzero
-! REAL(kind=r8), DIMENSION(7) :: epKstd
+  REAL(kind=8), DIMENSION(7) :: epK_local = (/0.002_r8, 0.0075_r8, 0.015_r8, 0.01_r8, 0.01_r8, 0.02_r8, 0.02_r8/)
+  REAL(kind=8), DIMENSION(7) :: epKstd = (/0.002_r8, 0.0075_r8, 0.015_r8, 0.01_r8, 0.01_r8, 0.02_r8, 0.02_r8/)
+  REAL(kind=8), DIMENSION(7) :: epKzero
+! REAL(kind=8), DIMENSION(7) :: epKstd
 ! Extend epK_local by 1 to later include error for Bt (simplifies coding)
-  REAL(kind=r8), DIMENSION(8) :: epK_local8
+  REAL(kind=8), DIMENSION(8) :: epK_local8
   CHARACTER*3, DIMENSION(8) ::  Kid = (/'k0 ','k1 ','k2 ','kb ','kw ','ka ','kc ', 'bt '/)
 ! CHARACTER*3, DIMENSION(7) :: Kid = (/'k0 ','k1 ','k2 ','kb ','kw ','ka ','kc '/)
 
   ! Default value for error on Total Boron (ebt)
-  REAL(kind=r8) :: ebt_local = 0.02_r8
-! REAL(kind=r8) :: ebt_local 
+  REAL(kind=8) :: ebt_local = 0.02_r8
+! REAL(kind=8) :: ebt_local 
 
   ! Default value for correlation between ALK & DIC
-  REAL(kind=r8) :: r_local = 0.0_r8
+  REAL(kind=8) :: r_local = 0.0_r8
 
   ! derivative of H on the <b>total scale</b>
-  REAL(kind=r8), DIMENSION(N) :: dh_dx
+  REAL(kind=8), DIMENSION(N) :: dh_dx
   ! derivative of CO2 partial pressure <b>[uatm]</b>
-  REAL(kind=r8), DIMENSION(N) :: dpco2_dx
+  REAL(kind=8), DIMENSION(N) :: dpco2_dx
   ! derivative of CO2 fugacity <b>[uatm]</b>
-  REAL(kind=r8), DIMENSION(N) :: dfco2_dx
+  REAL(kind=8), DIMENSION(N) :: dfco2_dx
   ! derivative of aqueous CO2* concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg</b>] depending on choice for optCON
-  REAL(kind=r8), DIMENSION(N) :: dco2_dx
+  REAL(kind=8), DIMENSION(N) :: dco2_dx
   ! derivative of (HCO3-) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=r8), DIMENSION(N) :: dhco3_dx
+  REAL(kind=8), DIMENSION(N) :: dhco3_dx
   ! derivative of (CO3--) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=r8), DIMENSION(N) :: dco3_dx
+  REAL(kind=8), DIMENSION(N) :: dco3_dx
   ! derivative of Omega for aragonite, i.e., the aragonite saturation state
-  REAL(kind=r8), DIMENSION(N) :: dOmegaA_dx
+  REAL(kind=8), DIMENSION(N) :: dOmegaA_dx
   ! derivative of Omega for calcite, i.e., the calcite saturation state
-  REAL(kind=r8), DIMENSION(N) :: dOmegaC_dx
+  REAL(kind=8), DIMENSION(N) :: dOmegaC_dx
 
   ! covariance tmp array for derivative of H on the <b>total scale</b>
-  REAL(kind=r8), DIMENSION(N) :: r_dh_dx
+  REAL(kind=8), DIMENSION(N) :: r_dh_dx
   ! covariance tmp array for derivative of CO2 partial pressure <b>[uatm]</b>
-  REAL(kind=r8), DIMENSION(N) :: r_dpco2_dx
+  REAL(kind=8), DIMENSION(N) :: r_dpco2_dx
   ! covariance tmp array for derivative of CO2 fugacity <b>[uatm]</b>
-  REAL(kind=r8), DIMENSION(N) :: r_dfco2_dx
+  REAL(kind=8), DIMENSION(N) :: r_dfco2_dx
   ! covariance tmp array for derivative of aqueous CO2* concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg</b>] depending on choice for optCON
-  REAL(kind=r8), DIMENSION(N) :: r_dco2_dx
+  REAL(kind=8), DIMENSION(N) :: r_dco2_dx
   ! covariance tmp array for derivative of (HCO3-) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=r8), DIMENSION(N) :: r_dhco3_dx
+  REAL(kind=8), DIMENSION(N) :: r_dhco3_dx
   ! covariance tmp array for derivative of (CO3--) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=r8), DIMENSION(N) :: r_dco3_dx
+  REAL(kind=8), DIMENSION(N) :: r_dco3_dx
   ! covariance tmp array for derivative of Omega for aragonite, i.e., the aragonite saturation state 
-  REAL(kind=r8), DIMENSION(N) :: r_dOmegaA_dx
+  REAL(kind=8), DIMENSION(N) :: r_dOmegaA_dx
   ! covariance tmp array for Omega for calcite, i.e., the calcite saturation state
-  REAL(kind=r8), DIMENSION(N) :: r_dOmegaC_dx
+  REAL(kind=8), DIMENSION(N) :: r_dOmegaC_dx
 
-  REAL(kind=r8), DIMENSION(N) :: K0, K1, K2, Kb, Kw, Ks, Kf, Kspc
-  REAL(kind=r8), DIMENSION(N) :: Kspa, K1p, K2p, K3p, Ksi
-  REAL(kind=r8), DIMENSION(N) :: St, Ft, Bt
+  REAL(kind=8), DIMENSION(N) :: K0, K1, K2, Kb, Kw, Ks, Kf, Kspc
+  REAL(kind=8), DIMENSION(N) :: Kspa, K1p, K2p, K3p, Ksi
+  REAL(kind=8), DIMENSION(N) :: St, Ft, Bt
   ! Standard error on dissociation constant Kx
-  REAL(kind=r8), DIMENSION(N) :: eK
+  REAL(kind=8), DIMENSION(N) :: eK
 
 ! Arrays to pass optional arguments into or use defaults (Dickson et al., 2007)
   CHARACTER(3) :: opB

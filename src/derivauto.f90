@@ -122,23 +122,23 @@ SUBROUTINE derivauto(ph_deriv, pco2_deriv, fco2_deriv, co2_deriv, hco3_deriv, co
   INTEGER, INTENT(in) :: N
   !> either <b>in situ temperature</b> (when optT='Tinsitu', typical data) 
   !! OR <b>potential temperature</b> (when optT='Tpot', typical models) <b>[degree C]</b>
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: temp
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: temp
   !> salinity <b>[psu]</b>
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sal
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: sal
   !> total alkalinity in <b>[eq/m^3]</b> (when optCON = 'mol/m3') OR in <b>[eq/kg]</b>  (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: alk
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: alk
   !> dissolved inorganic carbon in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: dic
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: dic
   !> SiO2 concentration in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sil
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: sil
   !> phosphate concentration in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: phos
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: phos
   !> atmospheric pressure <b>[atm]</b>
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: Patm
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: Patm
   !> depth in \b meters (when optP='m') or \b decibars (when optP='db')
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: depth
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: depth
   !> latitude <b>[degrees north]</b>
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: lat
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: lat
 
   !> choose either \b 'mol/kg' (std DATA units) or \b 'mol/m3' (std MODEL units) to select 
   !! concentration units for input (for alk, dic, sil, phos) & output (co2, hco3, co3)
@@ -168,30 +168,30 @@ SUBROUTINE derivauto(ph_deriv, pco2_deriv, fco2_deriv, co2_deriv, hco3_deriv, co
 
 ! Output variables:
   !> derivatives of pH on the <b>total scale</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(6,N) :: ph_deriv
+  REAL(kind=8), INTENT(out), DIMENSION(6,N) :: ph_deriv
   !> derivatives of CO2 partial pressure <b>[uatm]</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(6,N) :: pco2_deriv
+  REAL(kind=8), INTENT(out), DIMENSION(6,N) :: pco2_deriv
   !> derivatives of CO2 fugacity <b>[uatm]</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(6,N) :: fco2_deriv
+  REAL(kind=8), INTENT(out), DIMENSION(6,N) :: fco2_deriv
   !> derivatives of aqueous CO2* concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg</b>] depending on choice for optCON
-  REAL(kind=r8), INTENT(out), DIMENSION(6,N) :: co2_deriv
+  REAL(kind=8), INTENT(out), DIMENSION(6,N) :: co2_deriv
   !> derivatives of bicarbonate ion (HCO3-) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=r8), INTENT(out), DIMENSION(6,N) :: hco3_deriv
+  REAL(kind=8), INTENT(out), DIMENSION(6,N) :: hco3_deriv
   !> derivatives of carbonate ion (CO3--) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=r8), INTENT(out), DIMENSION(6,N) :: co3_deriv
+  REAL(kind=8), INTENT(out), DIMENSION(6,N) :: co3_deriv
   !> derivatives of Omega for aragonite, i.e., the aragonite saturation state
-  REAL(kind=r8), INTENT(out), DIMENSION(6,N) :: OmegaA_deriv
+  REAL(kind=8), INTENT(out), DIMENSION(6,N) :: OmegaA_deriv
   !> derivatives of Omega for calcite, i.e., the calcite saturation state
-  REAL(kind=r8), INTENT(out), DIMENSION(6,N) :: OmegaC_deriv
+  REAL(kind=8), INTENT(out), DIMENSION(6,N) :: OmegaC_deriv
 
 ! Local variables
   !> pressure <b>[decibars]</b>; p = f(depth, latitude) if computed from depth [m] (when optP='m') OR p = depth [db] (when optP='db')
-  REAL(kind=r8) :: press
+  REAL(kind=8) :: press
 
-  REAL(kind=r8) :: ssal, salk, sdic, ssil, sphos
+  REAL(kind=8) :: ssal, salk, sdic, ssil, sphos
 
   TYPE(DUAL_NUM) :: tempot, tempis68, tempot68, tempis90
-! REAL(kind=r8) :: dtempot, dtempot68
+! REAL(kind=8) :: dtempot, dtempot68
   TYPE(DUAL_NUM) :: drho_sw, drho
 
   TYPE(DUAL_NUM), DIMENSION(1) :: K0, K1, K2, Kb, Kw, Ks, Kf, Kspc
@@ -200,8 +200,8 @@ SUBROUTINE derivauto(ph_deriv, pco2_deriv, fco2_deriv, co2_deriv, hco3_deriv, co
 
   TYPE(DUAL_NUM), DIMENSION(1) :: Patmd
   TYPE(DUAL_NUM) :: pd
-  REAL(kind=r8) :: Ptot
-  REAL(kind=r8) :: Phydro_atm
+  REAL(kind=8) :: Ptot
+  REAL(kind=8) :: Phydro_atm
 
   INTEGER :: i, icount
 

@@ -148,23 +148,23 @@ SUBROUTINE vars(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p,
   INTEGER, INTENT(in) :: N
   !> either <b>in situ temperature</b> (when optT='Tinsitu', typical data) 
   !! OR <b>potential temperature</b> (when optT='Tpot', typical models) <b>[degree C]</b>
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: temp
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: temp
   !> salinity <b>[psu] or [g/kg]</b>
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sal
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: sal
   !> total alkalinity in <b>[eq/m^3]</b> (when optCON = 'mol/m3') OR in <b>[eq/kg]</b>  (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: alk
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: alk
   !> dissolved inorganic carbon in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: dic
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: dic
   !> SiO2 concentration in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sil
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: sil
   !> phosphate concentration in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: phos
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: phos
   !> atmospheric pressure <b>[atm]</b>
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: Patm
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: Patm
   !> depth in \b meters (when optP='m') or \b decibars (when optP='db')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: depth
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: depth
   !> latitude <b>[degrees north]</b>
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: lat
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: lat
 
   !> choose either \b 'mol/kg' (std DATA units) or \b 'mol/m3' (std MODEL units) to select 
   !! concentration units for input (for alk, dic, sil, phos) & output (co2, hco3, co3)
@@ -197,7 +197,7 @@ SUBROUTINE vars(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p,
   CHARACTER(4), OPTIONAL, INTENT(in) :: optS
   !> longitude <b>[degrees east]</b>
 !!!f2py real(8) optional, intent(in), dimension(n) :: lon = -25.
-  REAL(kind=r8), OPTIONAL, INTENT(in), DIMENSION(N) :: lon
+  REAL(kind=8), OPTIONAL, INTENT(in), DIMENSION(N) :: lon
 !f2py optional :: lon = -25.
   !> to print warnings when input out of bounds, use .true.; for no warnings, use .false.
 !!!f2py logical optional, intent(in) :: verbose = .true.
@@ -205,33 +205,33 @@ SUBROUTINE vars(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p,
 
 ! Output variables:
   !> pH on the <b>total scale</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: ph
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: ph
   !> CO2 partial pressure <b>[uatm]</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: pco2
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: pco2
   !> CO2 fugacity <b>[uatm]</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: fco2
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: fco2
   !> aqueous CO2* concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg</b>] depending on choice for optCON
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: co2
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: co2
   !> bicarbonate ion (HCO3-) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: hco3
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: hco3
   !> carbonate ion (CO3--) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: co3
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: co3
   !> Omega for aragonite, i.e., the aragonite saturation state
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: OmegaA
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: OmegaA
   !> Omega for calcite, i.e., the calcite saturation state
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: OmegaC
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: OmegaC
   !> Revelle factor, i.e., dpCO2/pCO2 / dDIC/DIC
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: BetaD
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: BetaD
   !> in-situ density of seawater; rhoSW = f(s, t, p) in <b>[kg/m3]</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: rhoSW
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: rhoSW
   !> pressure <b>[decibars]</b>; p = f(depth, latitude) if computed from depth [m] (when optP='m') OR p = depth [db] (when optP='db')
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: p
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: p
   !> in-situ temperature \b <b>[degrees C]</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: tempis
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: tempis
 
 ! Local variables
   ! practical salinity (psu)
-  REAL(kind=r8), DIMENSION(N) :: salprac
+  REAL(kind=8), DIMENSION(N) :: salprac
 
   
   ! Call the subroutine that actually computes
@@ -268,23 +268,23 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
   INTEGER, INTENT(in) :: N
   !> either <b>in situ temperature</b> (when optT='Tinsitu', typical data) 
   !! OR <b>potential temperature</b> (when optT='Tpot', typical models) <b>[degree C]</b>
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: temp
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: temp
   !> salinity <b>[psu] or [g/kg]</b>
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sal
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: sal
   !> total alkalinity in <b>[eq/m^3]</b> (when optCON = 'mol/m3') OR in <b>[eq/kg]</b>  (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: alk
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: alk
   !> dissolved inorganic carbon in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: dic
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: dic
   !> SiO2 concentration in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sil
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: sil
   !> phosphate concentration in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: phos
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: phos
   !> atmospheric pressure <b>[atm]</b>
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: Patm
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: Patm
   !> depth in \b meters (when optP='m') or \b decibars (when optP='db')
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: depth
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: depth
   !> latitude <b>[degrees north]</b>
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: lat
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: lat
 
   !> choose either \b 'mol/kg' (std DATA units) or \b 'mol/m3' (std MODEL units) to select 
   !! concentration units for input (for alk, dic, sil, phos) & output (co2, hco3, co3)
@@ -317,7 +317,7 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
   CHARACTER(4), OPTIONAL, INTENT(in) :: optS
   !> longitude <b>[degrees east]</b>
 !!!f2py real(8) optional, intent(in), dimension(n) :: lon = -25.
-  REAL(kind=r8), OPTIONAL, INTENT(in), DIMENSION(N) :: lon
+  REAL(kind=8), OPTIONAL, INTENT(in), DIMENSION(N) :: lon
 !f2py optional :: lon = -25.
 !
 !f2py logical optional, intent(in) :: verbose=.true.
@@ -325,60 +325,60 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
 
 ! Output variables:
   !> pH on the <b>total scale</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: ph
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: ph
   !> CO2 partial pressure <b>[uatm]</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: pco2
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: pco2
   !> CO2 fugacity <b>[uatm]</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: fco2
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: fco2
   !> aqueous CO2* concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg</b>] depending on choice for optCON
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: co2
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: co2
   !> bicarbonate ion (HCO3-) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: hco3
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: hco3
   !> carbonate ion (CO3--) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: co3
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: co3
   !> Omega for aragonite, i.e., the aragonite saturation state
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: OmegaA
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: OmegaA
   !> Omega for calcite, i.e., the calcite saturation state
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: OmegaC
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: OmegaC
   !> Revelle factor, i.e., dpCO2/pCO2 / dDIC/DIC
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: BetaD
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: BetaD
   !> in-situ density of seawater; rhoSW = f(s, t, p) in <b>[kg/m3]</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: rhoSW
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: rhoSW
   !> pressure <b>[decibars]</b>; p = f(depth, latitude) if computed from depth [m] (when optP='m') OR p = depth [db] (when optP='db')
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: p
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: p
   !> in-situ temperature \b <b>[degrees C]</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: tempis
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: tempis
   !> practical salinity \b <b>[psu]</b>
-  REAL(kind=r8), OPTIONAL, INTENT(out), DIMENSION(N) :: salprac
+  REAL(kind=8), OPTIONAL, INTENT(out), DIMENSION(N) :: salprac
 
 ! Local variables
-  REAL(kind=r8) :: ssal, salk, sdic, ssil, sphos
-  REAL(kind=r8) :: tempot, tempis68, tempot68, tempis90, tempcsv
-  REAL(kind=r8) :: drho
+  REAL(kind=8) :: ssal, salk, sdic, ssil, sphos
+  REAL(kind=8) :: tempot, tempis68, tempot68, tempis90, tempcsv
+  REAL(kind=8) :: drho
 
   ! local 1-long array version of scalar variables
-  REAL(kind=r8), DIMENSION(1) :: aK0, aK1, aK2, aKb, aKw, aKs, aKf, aKspc
-  REAL(kind=r8), DIMENSION(1) :: aKspa, aK1p, aK2p, aK3p, aKsi
-  REAL(kind=r8), DIMENSION(1) :: aSt, aFt, aBt
+  REAL(kind=8), DIMENSION(1) :: aK0, aK1, aK2, aKb, aKw, aKs, aKf, aKspc
+  REAL(kind=8), DIMENSION(1) :: aKspa, aK1p, aK2p, aK3p, aKsi
+  REAL(kind=8), DIMENSION(1) :: aSt, aFt, aBt
 
-  REAL(kind=r8), DIMENSION(1) :: sabs1, spra1, p1, lon1, lat1
-  REAL(kind=r8), DIMENSION(1) :: tc1, ta1, sit1, nt1
-  REAL(kind=r8), DIMENSION(1) :: sal1
+  REAL(kind=8), DIMENSION(1) :: sabs1, spra1, p1, lon1, lat1
+  REAL(kind=8), DIMENSION(1) :: tc1, ta1, sit1, nt1
+  REAL(kind=8), DIMENSION(1) :: sal1
   
-  REAL(kind=r8) :: Patmd
-  REAL(kind=r8) :: Ptot
-  REAL(kind=r8) :: Phydro_atm
+  REAL(kind=8) :: Patmd
+  REAL(kind=8) :: Ptot
+  REAL(kind=8) :: Phydro_atm
 
   INTEGER :: i, icount
 
-  REAL(kind=r8) :: prb
-  REAL(kind=r8) :: s
-  REAL(kind=r8) :: tc, ta
-  REAL(kind=r8) :: sit, pt
+  REAL(kind=8) :: prb
+  REAL(kind=8) :: s
+  REAL(kind=8) :: tc, ta
+  REAL(kind=8) :: sit, pt
   
-  REAL(kind=r8), DIMENSION(2) :: dicdel, pco2del
-  REAL(kind=r8) :: dx, Rf
-  REAL(kind=r8) :: dph, dpco2, dfco2, dco2, dhco3, dco3, dOmegaA, dOmegaC
+  REAL(kind=8), DIMENSION(2) :: dicdel, pco2del
+  REAL(kind=8) :: dx, Rf
+  REAL(kind=8) :: dph, dpco2, dfco2, dco2, dhco3, dco3, dOmegaA, dOmegaC
 
   INTEGER :: kcomp
   INTEGER :: j, minusplus
@@ -745,27 +745,27 @@ SUBROUTINE vars_pertK(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,       &
   INTEGER, INTENT(in) :: N
   !> either <b>in situ temperature</b> (when optT='Tinsitu', typical data) 
   !! OR <b>potential temperature</b> (when optT='Tpot', typical models) <b>[degree C]</b>
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: temp
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: temp
   !> salinity <b>[psu]</b>
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sal
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: sal
   !> total alkalinity in <b>[eq/m^3]</b> (when optCON = 'mol/m3') OR in <b>[eq/kg]</b>  (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: alk
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: alk
   !> dissolved inorganic carbon in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: dic
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: dic
   !> SiO2 concentration in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sil
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: sil
   !> phosphate concentration in <b>[mol/m^3]</b> (when optCON = 'mol/m3') OR in <b>[mol/kg]</b> (when optCON = 'mol/kg')
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: phos
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: phos
   !> atmospheric pressure <b>[atm]</b>
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: Patm
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: Patm
   !> depth in \b meters (when optP='m') or \b decibars (when optP='db')
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: depth
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: depth
   !> latitude <b>[degrees north]</b>
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: lat
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: lat
   !> Numeric id of dissociation constant
   INTEGER, INTENT(in)  ::  var_index
   !> Perturbation value
-  REAL(kind=r8), INTENT(in)  :: abs_delta
+  REAL(kind=8), INTENT(in)  :: abs_delta
   
   !> choose either \b 'mol/kg' (std DATA units) or \b 'mol/m3' (std MODEL units) to select 
   !! concentration units for input (for alk, dic, sil, phos) & output (co2, hco3, co3)
@@ -797,7 +797,7 @@ SUBROUTINE vars_pertK(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,       &
   CHARACTER(4), OPTIONAL, INTENT(in) :: optS
   !> longitude <b>[degrees east]</b>
 !!!f2py real(8) optional, intent(in), dimension(n) :: lon = -25.
-  REAL(kind=r8), OPTIONAL, INTENT(in), DIMENSION(N) :: lon
+  REAL(kind=8), OPTIONAL, INTENT(in), DIMENSION(N) :: lon
 !f2py optional :: lon = -25.
 !
 !f2py logical optional, intent(in) :: verbose
@@ -805,55 +805,55 @@ SUBROUTINE vars_pertK(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,       &
 
 ! Output variables:
   !> pH on the <b>total scale</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: ph
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: ph
   !> CO2 partial pressure <b>[uatm]</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: pco2
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: pco2
   !> CO2 fugacity <b>[uatm]</b>
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: fco2
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: fco2
   !> aqueous CO2* concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg</b>] depending on choice for optCON
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: co2
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: co2
   !> bicarbonate ion (HCO3-) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: hco3
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: hco3
   !> carbonate ion (CO3--) concentration, either in <b>[mol/m^3]</b> or <b>[mol/kg]</b> depending on choice for optCON
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: co3
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: co3
   !> Omega for aragonite, i.e., the aragonite saturation state
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: OmegaA
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: OmegaA
   !> Omega for calcite, i.e., the calcite saturation state
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: OmegaC
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: OmegaC
 
 ! Local variables
   !> in-situ density of seawater in <b>[kg/m3]</b>
-  REAL(kind=r8)  :: rhoSW
+  REAL(kind=8)  :: rhoSW
   !> pressure <b>[decibars]</b>
-  REAL(kind=r8) :: p
+  REAL(kind=8) :: p
 
-  REAL(kind=r8) :: ssal, salk, sdic, ssil, sphos
+  REAL(kind=8) :: ssal, salk, sdic, ssil, sphos
 
   !> in-situ temperature \b <b>[degrees C]</b>
-  REAL(kind=r8) :: tempot, tempis68, tempot68, tempis90, tempcsv
-  REAL(kind=r8) :: drho
+  REAL(kind=8) :: tempot, tempis68, tempot68, tempis90, tempcsv
+  REAL(kind=8) :: drho
 
   ! local 1-long array version of scalar variables
-  REAL(kind=r8), DIMENSION(1) :: aK0, aK1, aK2, aKb, aKw, aKs, aKf, aKspc
-  REAL(kind=r8), DIMENSION(1) :: aKspa, aK1p, aK2p, aK3p, aKsi
-  REAL(kind=r8), DIMENSION(1) :: aSt, aFt, aBt
+  REAL(kind=8), DIMENSION(1) :: aK0, aK1, aK2, aKb, aKw, aKs, aKf, aKspc
+  REAL(kind=8), DIMENSION(1) :: aKspa, aK1p, aK2p, aK3p, aKsi
+  REAL(kind=8), DIMENSION(1) :: aSt, aFt, aBt
 
-  REAL(kind=r8), DIMENSION(1) :: sabs1, spra1, p1, lon1, lat1
-  REAL(kind=r8), DIMENSION(1) :: tc1, ta1, sit1, nt1
-  REAL(kind=r8), DIMENSION(1) :: sal1 
+  REAL(kind=8), DIMENSION(1) :: sabs1, spra1, p1, lon1, lat1
+  REAL(kind=8), DIMENSION(1) :: tc1, ta1, sit1, nt1
+  REAL(kind=8), DIMENSION(1) :: sal1 
   
-  REAL(kind=r8) :: Patmd
-  REAL(kind=r8) :: Ptot
-  REAL(kind=r8) :: Phydro_atm
+  REAL(kind=8) :: Patmd
+  REAL(kind=8) :: Ptot
+  REAL(kind=8) :: Phydro_atm
 
   INTEGER :: i, icount
 
-  REAL(kind=r8) :: prb
-  REAL(kind=r8) :: s
-  REAL(kind=r8) :: tc, ta
-  REAL(kind=r8) :: sit, pt
+  REAL(kind=8) :: prb
+  REAL(kind=8) :: s
+  REAL(kind=8) :: tc, ta
+  REAL(kind=8) :: sit, pt
   
-  REAL(kind=r8) :: dph, dpco2, dfco2, dco2, dhco3, dco3, dOmegaA, dOmegaC
+  REAL(kind=8) :: dph, dpco2, dfco2, dco2, dhco3, dco3, dOmegaA, dOmegaC
 
 ! Arrays to pass optional arguments into or use defaults (Dickson et al., 2007)
   CHARACTER(3) :: opB

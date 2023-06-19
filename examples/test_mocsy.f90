@@ -11,49 +11,49 @@ PROGRAM test_mocsy
 
 !  For vars routine (called below)
 !  "vars" Output variables:
-   REAL(kind=r8), DIMENSION(100) :: ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p, tempis
+   REAL(kind=8), DIMENSION(100) :: ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rhoSW, p, tempis
 !  "vars" Input variables
    INTEGER :: N
-   REAL(kind=r8), DIMENSION(100) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat
-   REAL(kind=r8), DIMENSION(6,100) :: ph_deriv, pco2_deriv, fco2_deriv, co2_deriv, hco3_deriv, co3_deriv, OmegaA_deriv, OmegaC_deriv
-   REAL(kind=r8) ::  gamma_DIC, gamma_Alk, beta_DIC, beta_Alk, omega_DIC, omega_Alk
+   REAL(kind=8), DIMENSION(100) :: temp, sal, alk, dic, sil, phos, Patm, depth, lat
+   REAL(kind=8), DIMENSION(6,100) :: ph_deriv, pco2_deriv, fco2_deriv, co2_deriv, hco3_deriv, co3_deriv, OmegaA_deriv, OmegaC_deriv
+   REAL(kind=8) ::  gamma_DIC, gamma_Alk, beta_DIC, beta_Alk, omega_DIC, omega_Alk
 !  "vars" Input options
    CHARACTER(10) :: optCON, optT, optP, optB, optKf, optK1K2
 
   !> solubility of CO2 in seawater (Weiss, 1974), also known as K0
-  REAL(kind=r8), DIMENSION(6) :: K0
+  REAL(kind=8), DIMENSION(6) :: K0
   !> K1 for the dissociation of carbonic acid from Lueker et al. (2000) or Millero (2010), depending on optK1K2
-  REAL(kind=r8), DIMENSION(6) :: K1
+  REAL(kind=8), DIMENSION(6) :: K1
   !> K2 for the dissociation of carbonic acid from Lueker et al. (2000) or Millero (2010), depending on optK1K2
-  REAL(kind=r8), DIMENSION(6) :: K2
+  REAL(kind=8), DIMENSION(6) :: K2
   !> equilibrium constant for dissociation of boric acid 
-  REAL(kind=r8), DIMENSION(6) :: Kb
+  REAL(kind=8), DIMENSION(6) :: Kb
   !> equilibrium constant for the dissociation of water (Millero, 1995)
-  REAL(kind=r8), DIMENSION(6) :: Kw
+  REAL(kind=8), DIMENSION(6) :: Kw
   !> equilibrium constant for the dissociation of bisulfate (Dickson, 1990)
-  REAL(kind=r8), DIMENSION(6) :: Ks
+  REAL(kind=8), DIMENSION(6) :: Ks
   !> equilibrium constant for the dissociation of hydrogen fluoride 
   !! either from Dickson and Riley (1979) or from Perez and Fraga (1987), depending on optKf
-  REAL(kind=r8), DIMENSION(6) :: Kf
+  REAL(kind=8), DIMENSION(6) :: Kf
   !> solubility product for calcite (Mucci, 1983)
-  REAL(kind=r8), DIMENSION(6) :: Kspc
+  REAL(kind=8), DIMENSION(6) :: Kspc
   !> solubility product for aragonite (Mucci, 1983)
-  REAL(kind=r8), DIMENSION(6) :: Kspa
+  REAL(kind=8), DIMENSION(6) :: Kspa
   !> 1st dissociation constant for phosphoric acid (Millero, 1995)
-  REAL(kind=r8), DIMENSION(6) :: K1p
+  REAL(kind=8), DIMENSION(6) :: K1p
   !> 2nd dissociation constant for phosphoric acid (Millero, 1995)
-  REAL(kind=r8), DIMENSION(6) :: K2p
+  REAL(kind=8), DIMENSION(6) :: K2p
   !> 3rd dissociation constant for phosphoric acid (Millero, 1995)
-  REAL(kind=r8), DIMENSION(6) :: K3p
+  REAL(kind=8), DIMENSION(6) :: K3p
   !> equilibrium constant for the dissociation of silicic acid (Millero, 1995)
-  REAL(kind=r8), DIMENSION(6) :: Ksi
+  REAL(kind=8), DIMENSION(6) :: Ksi
   !> total sulfate (Morris & Riley, 1966)
-  REAL(kind=r8), DIMENSION(6) :: St
+  REAL(kind=8), DIMENSION(6) :: St
   !> total fluoride  (Riley, 1965)
-  REAL(kind=r8), DIMENSION(6) :: Ft
+  REAL(kind=8), DIMENSION(6) :: Ft
   !> total boron
   !! from either Uppstrom (1974) or Lee et al. (2010), depending on optB
-  REAL(kind=r8), DIMENSION(6) :: Bt
+  REAL(kind=8), DIMENSION(6) :: Bt
 
 !  Local variables:
    INTEGER :: i

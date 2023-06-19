@@ -25,24 +25,24 @@ FUNCTION sw_ptmp  (s,t,p,pr)
 
 ! Input arguments
   !> salinity [psu (PSS-78)]
-  REAL(kind=r8) :: s
+  REAL(kind=8) :: s
   !> temperature [degree C (IPTS-68)]
-  REAL(kind=r8) :: t
+  REAL(kind=8) :: t
   !> pressure [db]
-  REAL(kind=r8) :: p
+  REAL(kind=8) :: p
   !> reference pressure  [db]  
-  REAL(kind=r8) :: pr
+  REAL(kind=8) :: pr
 
 ! local arguments
-  REAL(kind=r8) :: del_P ,del_th, th, q
-  REAL(kind=r8) :: onehalf, two, three
+  REAL(kind=8) :: del_P ,del_th, th, q
+  REAL(kind=8) :: onehalf, two, three
   PARAMETER (onehalf = 0.5d0, two = 2.d0, three = 3.d0 )
 
-! REAL(kind=r8) :: sw_adtg
+! REAL(kind=8) :: sw_adtg
 ! EXTERNAL sw_adtg
 
 ! Output 
-  REAL(kind=r8) :: sw_ptmp
+  REAL(kind=8) :: sw_ptmp
 
   ! theta1
   del_P  = PR - P
@@ -105,7 +105,7 @@ FUNCTION sw_ptmp_DNAD  (s,t,p,pr)
 
 ! local arguments
   TYPE(DUAL_NUM) :: del_P ,del_th, th, q
-  REAL(kind=r8) :: onehalf, two, three
+  REAL(kind=8) :: onehalf, two, three
   PARAMETER (onehalf = 0.5d0, two = 2.d0, three = 3.d0 )
 
 ! Output 

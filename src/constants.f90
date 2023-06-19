@@ -110,16 +110,16 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   INTEGER, INTENT(in) :: N
   !> in <b>situ temperature</b> (when optT='Tinsitu', typical data) 
   !! OR <b>potential temperature</b> (when optT='Tpot', typical models) [degree C]
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: temp
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: temp
   !> depth in <b>meters</b> (when optP='m') or <b>decibars</b> (when optP='db')
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: depth
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: depth
   !> latitude <b>[degrees north]</b>
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: lat
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: lat
   !> salinity <b>[psu]</b>
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: sal
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: sal
 
   !> atmospheric pressure <b>[atm]</b>
-  REAL(kind=r8), INTENT(in), DIMENSION(N) :: Patm
+  REAL(kind=8), INTENT(in), DIMENSION(N) :: Patm
 
   !> for temp input, choose \b 'Tinsitu' for in situ Temp or 
   !! \b 'Tpot' for potential temperature (in situ Temp is computed, needed for models)
@@ -149,76 +149,76 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   CHARACTER(4), OPTIONAL, INTENT(in) :: optS
   !> longitude <b>[degrees east]</b>
 !!!f2py real(8) optional, intent(in), dimension(n) :: lon = -25.
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
 !f2py optional :: lon = -25.
 
 ! Ouput variables
   !> solubility of CO2 in seawater (Weiss, 1974), also known as K0
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: K0
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: K0
   !> K1 for the dissociation of carbonic acid from Lueker et al. (2000) or Millero (2010), depending on optK1K2
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: K1
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: K1
   !> K2 for the dissociation of carbonic acid from Lueker et al. (2000) or Millero (2010), depending on optK1K2
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: K2
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: K2
   !> equilibrium constant for dissociation of boric acid 
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: Kb
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: Kb
   !> equilibrium constant for the dissociation of water (Millero, 1995)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: Kw
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: Kw
   !> equilibrium constant for the dissociation of bisulfate (Dickson, 1990)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: Ks
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: Ks
   !> equilibrium constant for the dissociation of hydrogen fluoride 
   !! either from Dickson and Riley (1979) or from Perez and Fraga (1987), depending on optKf
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: Kf
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: Kf
   !> solubility product for calcite (Mucci, 1983)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: Kspc
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: Kspc
   !> solubility product for aragonite (Mucci, 1983)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: Kspa
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: Kspa
   !> 1st dissociation constant for phosphoric acid (Millero, 1995)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: K1p
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: K1p
   !> 2nd dissociation constant for phosphoric acid (Millero, 1995)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: K2p
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: K2p
   !> 3rd dissociation constant for phosphoric acid (Millero, 1995)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: K3p
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: K3p
   !> equilibrium constant for the dissociation of silicic acid (Millero, 1995)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: Ksi
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: Ksi
   !> total sulfate (Morris & Riley, 1966)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: St
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: St
   !> total fluoride  (Riley, 1965)
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: Ft
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: Ft
   !> total boron
   !! from either Uppstrom (1974) or Lee et al. (2010), depending on optB
-  REAL(kind=r8), INTENT(out), DIMENSION(N) :: Bt
+  REAL(kind=8), INTENT(out), DIMENSION(N) :: Bt
 
 ! Local variables
-  REAL(kind=r8) :: ssal
-  REAL(kind=r8) :: p
-  REAL(kind=r8) :: tempot, tempis68, tempot68
-  REAL(kind=r8) :: tempis
-  REAL(kind=r8) :: is, invtk, dlogtk, is2, s2, sqrtis
-  REAL(kind=r8) :: Ks_0p, Kf_0p
-  REAL(kind=r8) :: total2free, free2SWS, total2SWS, SWS2total
-  REAL(kind=r8) :: total2free_0p, free2SWS_0p, total2SWS_0p
-! REAL(kind=r8) :: free2SWS, free2SWS_0p
+  REAL(kind=8) :: ssal
+  REAL(kind=8) :: p
+  REAL(kind=8) :: tempot, tempis68, tempot68
+  REAL(kind=8) :: tempis
+  REAL(kind=8) :: is, invtk, dlogtk, is2, s2, sqrtis
+  REAL(kind=8) :: Ks_0p, Kf_0p
+  REAL(kind=8) :: total2free, free2SWS, total2SWS, SWS2total
+  REAL(kind=8) :: total2free_0p, free2SWS_0p, total2SWS_0p
+! REAL(kind=8) :: free2SWS, free2SWS_0p
 
-  REAL(kind=r8) :: dtempot, dtempot68
-  REAL(kind=r8) :: R
+  REAL(kind=8) :: dtempot, dtempot68
+  REAL(kind=8) :: R
 
-  REAL(kind=r8) :: pK1o, ma1, mb1, mc1, pK1
-  REAL(kind=r8) :: pK2o, ma2, mb2, mc2, pK2
+  REAL(kind=8) :: pK1o, ma1, mb1, mc1, pK1
+  REAL(kind=8) :: pK2o, ma2, mb2, mc2, pK2
 
-  REAL(kind=r8), DIMENSION(12) :: a0, a1, a2, b0, b1, b2
-  REAL(kind=r8), DIMENSION(12) :: deltav, deltak, lnkpok0
-  REAL(kind=r8) :: tmp, nK0we74
+  REAL(kind=8), DIMENSION(12) :: a0, a1, a2, b0, b1, b2
+  REAL(kind=8), DIMENSION(12) :: deltav, deltak, lnkpok0
+  REAL(kind=8) :: tmp, nK0we74
 
   INTEGER :: i, icount, ipc
 
-  REAL(kind=r8) :: t, tk, tk0, prb
-  REAL(kind=r8) :: s, sqrts, s15, scl
+  REAL(kind=8) :: t, tk, tk0, prb
+  REAL(kind=8) :: s, sqrts, s15, scl
 
-  REAL(kind=r8) :: Phydro_atm, Patmd, Ptot, Rgas_atm, vbarCO2
+  REAL(kind=8) :: Phydro_atm, Patmd, Ptot, Rgas_atm, vbarCO2
 
 ! local 1-long array version of scalar variables
-  REAL(kind=r8), DIMENSION(1) :: lon1, lat1
-  REAL(kind=r8), DIMENSION(1) :: p1, spra1, sabs1
+  REAL(kind=8), DIMENSION(1) :: lon1, lat1
+  REAL(kind=8), DIMENSION(1) :: p1, spra1, sabs1
 
 ! Arrays to pass optional arguments into or use defaults (Dickson et al., 2007)
   CHARACTER(3) :: opB
@@ -814,9 +814,9 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   !! OR <b>potential temperature</b> (when optT='Tpot', typical models) [degree C]
   TYPE(DUAL_NUM), INTENT(in),    DIMENSION(N) :: temp
   !> depth in <b>meters</b> (when optP='m') or <b>decibars</b> (when optP='db')
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: depth
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: depth
   !> latitude <b>[degrees north]</b>
-  REAL(kind=r8), INTENT(in),    DIMENSION(N) :: lat
+  REAL(kind=8), INTENT(in),    DIMENSION(N) :: lat
   !> salinity <b>[psu]</b>
   TYPE(DUAL_NUM), INTENT(in), DIMENSION(N) :: sal
 !f2py integer intent(hide), depend(sal) :: n=len(sal)
@@ -852,7 +852,7 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   CHARACTER(4), OPTIONAL, INTENT(in) :: optS
   !> longitude <b>[degrees east]</b>
 !!!f2py real(8) optional, intent(in), dimension(n) :: lon = -25.
-  REAL(kind=r8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
+  REAL(kind=8), OPTIONAL, INTENT(in),    DIMENSION(N) :: lon
 !f2py optional :: lon = -25.
 
 ! Ouput variables
@@ -908,7 +908,7 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   TYPE(DUAL_NUM) ::pK1o, ma1, mb1, mc1, pK1
   TYPE(DUAL_NUM) ::pK2o, ma2, mb2, mc2, pK2
 
-  REAL(kind=r8), DIMENSION(12) :: a0, a1, a2, b0, b1, b2
+  REAL(kind=8), DIMENSION(12) :: a0, a1, a2, b0, b1, b2
   TYPE(DUAL_NUM), DIMENSION(12) :: deltav, deltak, lnkpok0
   TYPE(DUAL_NUM) ::tmp, nK0we74
 
@@ -922,8 +922,8 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
   TYPE (DUAL_NUM),PARAMETER:: zero=DUAL_NUM(0d0,0.D0), ten=DUAL_NUM(10d0,0.D0)
 
 ! local 1-long array version of scalar variables
-  REAL(kind=r8), DIMENSION(1) :: lon1, lat1
-  REAL(kind=r8), DIMENSION(1) :: p1, spra1, sabs1
+  REAL(kind=8), DIMENSION(1) :: lon1, lat1
+  REAL(kind=8), DIMENSION(1) :: p1, spra1, sabs1
 
 ! Arrays to pass optional arguments into or use defaults (Dickson et al., 2007)
   CHARACTER(3) :: opB
