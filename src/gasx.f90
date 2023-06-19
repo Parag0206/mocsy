@@ -360,7 +360,7 @@ SUBROUTINE flxco2(co2flux, co2ex, dpco2,                                        
 !       "Atmospheric" [CO2*], air-sea CO2 flux, sfc DIC rate of change, & Delta pCO2
         co2starair = K0 * DBLE(fco2atm(i)) * 1.0e-6_r8 * DBLE(rhoSW(i)) !Equil. [CO2*] for atm CO2 at Patm & sfc-water T,S [mol/m3]
         co2star = DBLE(co2(i))                                          !Oceanic [CO2*] in [mol/m3] from vars.f90
-        co2flux(i) = SGLE(kwco2 * (co2starair - co2star))               !Air-sea CO2 flux [mol/(m2 * s)]
+        co2flux(i) = (kwco2 * (co2starair - co2star))               !Air-sea CO2 flux [mol/(m2 * s)]
         co2ex(i) = co2flux(i) / dz1                                     !Change in sfc DIC due to gas exchange [mol/[m3 * s)]
         dpco2(i) = pco2(i) - pco2atm(i)                                 !Delta pCO2 (oceanic - atmospheric pCO2) [uatm]
      ENDIF
@@ -411,7 +411,7 @@ SUBROUTINE pCO2atm2xCO2(pCO2atm, temp, salt, Patm, N, xCO2)
      dpCO2atm  = DBLE(pCO2atm(i))
      dPatm     = DBLE(Patm(i))
      dxCO2     = dpCO2atm / (dPatm - pH20(i))
-     xCO2(i) = SGLE(dxCO2)
+     xCO2(i) = (dxCO2)
   END DO
 
   RETURN
@@ -591,7 +591,7 @@ SUBROUTINE x2pCO2atm(xCO2, temp, salt, Patm, N, pCO2atm)
      dxCO2     = DBLE(xCO2(i))
      dPatm     = DBLE(Patm(i))
      dpCO2atm = (dPatm - pH20(i)) * dxCO2
-     pCO2atm(i) = SGLE(dpCO2atm)
+     pCO2atm(i) = (dpCO2atm)
   END DO
 
   RETURN
@@ -1056,7 +1056,7 @@ SUBROUTINE o2flux(T, S, kw660, ppo, o2, dz1, N, o2ex)
   INTEGER :: i
   
 ! Dissolved O2 saturation concentraion [mol/m^3] (in equilibrium with atmosphere) at 1 atm pressure 
-  CALL o2sato(SGLE(T), SGLE(S), N, o2sat_1atm)
+  CALL o2sato((T), (S), N, o2sat_1atm)
 
   DO i = 1, N
 !     Transfer velocity for O2 in m/s [4]

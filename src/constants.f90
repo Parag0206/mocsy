@@ -317,7 +317,7 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
 !          (see Dickson et al., Best Practices Guide, 2007, Chap. 5, p. 7, including footnote)
         tempot68 = (tempot - 0.0002_r8) / 0.99975_r8
 !       b) Compute "in-situ Temperature" from "Potential Temperature" (both on IPTS 68)
-        tempis68 = sw_temp(sal(i), tempot68, p, SGLE(0.0D0) )
+        tempis68 = sw_temp(sal(i), tempot68, p, (0.0D0) )
 !       c) Convert the in-situ temp on older IPTS 68 scale to modern scale (ITS 90)
         tempis = 0.99975_r8*tempis68 + 0.0002_r8
 !       Note: parts (a) and (c) above are tiny corrections;
@@ -340,7 +340,7 @@ SUBROUTINE constants(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
             sabs1(1) = sal(i)
         END IF
         ! Then convert temperature
-        tempis = SGLE(gsw_t_from_ct (DBLE(sabs1(1)), DBLE(temp(i)), DBLE(p)))
+        tempis = (gsw_t_from_ct (DBLE(sabs1(1)), DBLE(temp(i)), DBLE(p)))
         tempis68  = (tempis - 0.0002_r8) / 0.99975_r8
      ELSE
         PRINT *,"optT must be either 'Tpot, 'Tinsitu' or 'Tcsv'"
@@ -1038,11 +1038,11 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
         ! First convert salinity to absolute sal., if necessary
         IF (trim(opS) == 'Sprc')  THEN
             ! conversion will use default geographic location
-            spra1(1) = SGLE(sal(i)%x_ad_)
-            p1(1) = SGLE(p%x_ad_)
+            spra1(1) = (sal(i)%x_ad_)
+            p1(1) = (p%x_ad_)
             CALL sp2sa_geo (spra1, 1, sabs1, p1)
         ELSE
-            sabs1(1) = SGLE(sal(i)%x_ad_)
+            sabs1(1) = (sal(i)%x_ad_)
         END IF
         ! Then convert temperature
         tempis%x_ad_ = gsw_t_from_ct (DBLE(sabs1(1)), temp(i)%x_ad_, p%x_ad_)
@@ -1085,8 +1085,8 @@ SUBROUTINE constants_DNAD(K0, K1, K2, Kb, Kw, Ks, Kf, Kspc, Kspa,  &
         IF (trim(opS) == 'Sabs')  THEN
            IF (PRESENT(lon)) THEN
                ! longitude is passed in
-               sabs1(1) = SGLE(ssal%x_ad_)
-               p1(1) = SGLE(p%x_ad_)
+               sabs1(1) = (ssal%x_ad_)
+               p1(1) = (p%x_ad_)
                lon1(1) = lon(i)
                lat1(1) = lat(i)
            ELSE

@@ -419,14 +419,14 @@ SUBROUTINE derivauto(ph_deriv, pco2_deriv, fco2_deriv, co2_deriv, hco3_deriv, co
                     Patmd(1), prb, drho, opGAS                                      )
 
 !       Save derivatives
-        ph_deriv(:,i)     = SGLE(dph%xp_ad_)
-        pCO2_deriv(:,i)   = SGLE(dpCO2%xp_ad_)
-        fCO2_deriv(:,i)   = SGLE(dfCO2%xp_ad_)
-        co2_deriv(:,i)    = SGLE(dco2%xp_ad_)
-        hco3_deriv(:,i)   = SGLE(dhco3%xp_ad_)
-        co3_deriv(:,i)    = SGLE(dco3%xp_ad_)
-        OmegaA_deriv(:,i) = SGLE(dOmegaA%xp_ad_)
-        OmegaC_deriv(:,i) = SGLE(dOmegaC%xp_ad_)
+        ph_deriv(:,i)     = (dph%xp_ad_)
+        pCO2_deriv(:,i)   = (dpCO2%xp_ad_)
+        fCO2_deriv(:,i)   = (dfCO2%xp_ad_)
+        co2_deriv(:,i)    = (dco2%xp_ad_)
+        hco3_deriv(:,i)   = (dhco3%xp_ad_)
+        co3_deriv(:,i)    = (dco3%xp_ad_)
+        OmegaA_deriv(:,i) = (dOmegaA%xp_ad_)
+        OmegaC_deriv(:,i) = (dOmegaC%xp_ad_)
 
      ELSE
 

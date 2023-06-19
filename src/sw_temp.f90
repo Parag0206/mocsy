@@ -66,7 +66,7 @@ FUNCTION sw_temp( s, t, p, pr )
   !    Carry out inverse calculation by swapping P_ref (pr) and Pressure (p)
   !    in routine that is normally used to compute potential temp from temp
   dsw_temp = sw_ptmp(ds, dt, dpr, dp)
-  sw_temp = SGLE(dsw_temp)
+  sw_temp = (dsw_temp)
 
   !    The above simplification works extremely well (compared to Table in 1983 report)
   !    whereas the sw_temp routine from MIT GCM site does not seem to work right

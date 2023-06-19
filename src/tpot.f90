@@ -49,7 +49,7 @@ SUBROUTINE tpot(salt, tempis, press, pressref, N, tempot)
 
      dtempot   = sw_ptmp(dsalt, dtempis, dpress, dpressref)
 
-     tempot(i) = SGLE(dtempot)
+     tempot(i) = (dtempot)
   END DO
 
   RETURN

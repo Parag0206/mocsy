@@ -58,7 +58,7 @@ SUBROUTINE p2fCO2(pCO2, temp, Patm, p, N, fCO2)
      xc2 = (1.0d0 - xCO2approx)**2 
      fugcoeff = EXP( Ptot*(B + 2.0d0*xc2*Del)/(Rgas_atm*tk) )
      dfCO2 = dpCO2 * fugcoeff
-     fCO2(i) = SGLE(dfCO2)
+     fCO2(i) = (dfCO2)
   END DO
 
   RETURN

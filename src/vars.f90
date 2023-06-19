@@ -464,7 +464,7 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
 !          (see Dickson et al., Best Practices Guide, 2007, Chap. 5, p. 7, including footnote)
         tempot68 = (tempot - 0.0002_r8) / 0.99975_r8
 !       b) Compute "in-situ Temperature" from "Potential Temperature" (both on IPTS 68)
-        tempis68 = sw_temp(sal(i), SGLE(tempot68), p(i), SGLE(0.d0) )
+        tempis68 = sw_temp(sal(i), (tempot68), p(i), (0.d0) )
 !       c) Convert the in-situ temp on older IPTS 68 scale to modern scale (ITS 90)
         tempis90 = 0.99975*tempis68 + 0.0002_r8
 !       Note: parts (a) and (c) above are tiny corrections;
@@ -494,7 +494,7 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
         PRINT *,"you specified optT =", trim(optT) 
         STOP
      ENDIF
-     tempis(i) = SGLE(tempis90)
+     tempis(i) = (tempis90)
 
 !    ================================================================
 !    Carbonate chemistry computations
@@ -546,7 +546,7 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
 !       Atmospheric pressure
         Patmd = DBLE(Patm(i))
 !       Hydrostatic pressure (prb is in bars)
-        prb = DBLE(p(i) / SGLE(10.0d0))
+        prb = DBLE(p(i) / (10.0d0))
         Phydro_atm = prb / 1.01325d0  ! convert hydrostatic pressure from bar to atm (1.01325 bar / atm)
 !       Total pressure [atm]
         IF     (trim(opGAS) == 'Pzero'   .OR. trim(opGAS) == 'pzero') THEN
@@ -572,7 +572,7 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
            ENDIF
            rhoSW(i) = gsw_rho(DBLE(ssal), tempcsv, prb)
         ELSE
-           rhoSW(i) = rho(ssal, SGLE(tempis68), SGLE(prb))
+           rhoSW(i) = rho(ssal, (tempis68), (prb))
         ENDIF
 
 !       Either convert units of DIC and ALK (MODEL case) or not (DATA case)
@@ -622,11 +622,11 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
                CALL sa2sp_chem(sabs1, ta1, tc1, nt1, sit1, 1, spra1)
            ENDIF
            s = DBLE(spra1(1))
-           IF (PRESENT(salprac)) salprac(i) = SGLE(s)
+           IF (PRESENT(salprac)) salprac(i) = (s)
         ENDIF
           
 !       Get all equilibrium constants and total concentrations of SO4, F, B
-        sal1(1) = SGLE(s)
+        sal1(1) = (s)
         CALL constants (aK0, aK1, aK2, aKb, aKw, aKs, aKf,            &
                     aKspc, aKspa, aK1p, aK2p, aK3p, aKsi,             &
                     aSt, aFt, aBt,                                    &
@@ -644,14 +644,14 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
                     Patmd, prb, drho, opGAS                   )
 
 !       Convert all output variables from double to single precision, if necessary
-        pH(i)     = SGLE(dph)
-        co2(i)    = SGLE(dco2)
-        hco3(i)   = SGLE(dhco3)
-        co3(i)    = SGLE(dco3)
-        fCO2(i)   = SGLE(dfCO2)
-        pCO2(i)   = SGLE(dpCO2)
-        OmegaA(i) = SGLE(dOmegaA)
-        OmegaC(i) = SGLE(dOmegaC)
+        pH(i)     = (dph)
+        co2(i)    = (dco2)
+        hco3(i)   = (dhco3)
+        co3(i)    = (dco3)
+        fCO2(i)   = (dfCO2)
+        pCO2(i)   = (dpCO2)
+        OmegaA(i) = (dOmegaA)
+        OmegaC(i) = (dOmegaC)
 
 !       Compute Revelle factor numerically (derivative using centered-difference scheme)
         DO j=1,2
@@ -671,7 +671,7 @@ SUBROUTINE vars_sprac (ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC, BetaD, rh
        !Rf = (pco2del(2) - pco2del(1)) / (dx)                          ! dpCO2/dDIC (same as just above)
         Rf = Rf * tc / dpco2                                           ! R = (dpCO2/dDIC) * (DIC/pCO2)
 
-        BetaD(i) = SGLE(Rf)
+        BetaD(i) = (Rf)
 
      ELSE
 
@@ -946,7 +946,7 @@ SUBROUTINE vars_pertK(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,       &
 !          (see Dickson et al., Best Practices Guide, 2007, Chap. 5, p. 7, including footnote)
         tempot68 = (tempot - 0.0002) / 0.99975
 !       b) Compute "in-situ Temperature" from "Potential Temperature" (both on IPTS 68)
-        tempis68 = sw_temp(sal(i), SGLE(tempot68), p, SGLE(0.d0) )
+        tempis68 = sw_temp(sal(i), (tempot68), p, (0.d0) )
 !       c) Convert the in-situ temp on older IPTS 68 scale to modern scale (ITS 90)
         tempis90 = 0.99975*tempis68 + 0.0002
 !       Note: parts (a) and (c) above are tiny corrections;
@@ -1027,7 +1027,7 @@ SUBROUTINE vars_pertK(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,       &
 !       Atmospheric pressure
         Patmd = DBLE(Patm(i))
 !       Hydrostatic pressure (prb is in bars)
-        prb = DBLE(p / SGLE(10.0d0))
+        prb = DBLE(p / (10.0d0))
         Phydro_atm = prb / 1.01325d0  ! convert hydrostatic pressure from bar to atm (1.01325 bar / atm)
 !       Total pressure [atm]
         IF     (trim(opGAS) == 'Pzero'   .OR. trim(opGAS) == 'pzero') THEN
@@ -1053,7 +1053,7 @@ SUBROUTINE vars_pertK(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,       &
            ENDIF
            rhoSW = gsw_rho(DBLE(ssal), tempcsv, prb)
         ELSE
-           rhoSW = rho(ssal, SGLE(tempis68), SGLE(prb))
+           rhoSW = rho(ssal, (tempis68), (prb))
         ENDIF
 
 !       Either convert units of DIC and ALK (MODEL case) or not (DATA case)
@@ -1106,7 +1106,7 @@ SUBROUTINE vars_pertK(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,       &
         ENDIF
           
 !       Get all equilibrium constants and total concentrations of SO4, F, B
-        sal1(1) = SGLE(s)
+        sal1(1) = (s)
         CALL constants (aK0, aK1, aK2, aKb, aKw, aKs, aKf,            &
                     aKspc, aKspa, aK1p, aK2p, aK3p, aKsi,             &
                     aSt, aFt, aBt,                                    &
@@ -1144,14 +1144,14 @@ SUBROUTINE vars_pertK(ph, pco2, fco2, co2, hco3, co3, OmegaA, OmegaC,       &
                     Patmd, prb, drho, opGAS                   )
 
 !       Convert all output variables from double to single precision, if necessary
-        pH(i)     = SGLE(dph)
-        co2(i)    = SGLE(dco2)
-        hco3(i)   = SGLE(dhco3)
-        co3(i)    = SGLE(dco3)
-        fCO2(i)   = SGLE(dfCO2)
-        pCO2(i)   = SGLE(dpCO2)
-        OmegaA(i) = SGLE(dOmegaA)
-        OmegaC(i) = SGLE(dOmegaC)
+        pH(i)     = (dph)
+        co2(i)    = (dco2)
+        hco3(i)   = (dhco3)
+        co3(i)    = (dco3)
+        fCO2(i)   = (dfCO2)
+        pCO2(i)   = (dpCO2)
+        OmegaA(i) = (dOmegaA)
+        OmegaC(i) = (dOmegaC)
 
      ELSE
 

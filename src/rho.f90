@@ -82,7 +82,7 @@ FUNCTION rho(salt, temp, pbar)
 
 ! Density of seawater at S,T,P
   drho = rho0/(1.0d0 - P/Ksbm)
-  rho = SGLE(drho)
+  rho = (drho)
 
   RETURN
 END FUNCTION rho
